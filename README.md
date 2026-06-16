@@ -17,7 +17,7 @@ The portal is intended for internal users, not customers. Staff members will be 
 ### Main Features: (tbu)
   - Internal user login
   - Product catalog management
-  ...
+  - ...
 
 ### Milestone 1 Deliverables: Testable User Stories **(Due June 30)**
   - [ ] Testable User Stories
@@ -39,5 +39,5 @@ The portal is intended for internal users, not customers. Staff members will be 
   - Esteban Fuentes
   - Myar Nguyen
 
-## How to Run (tbu)
+### How to Run (tbu)
   
