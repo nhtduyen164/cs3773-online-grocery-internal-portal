@@ -8,11 +8,17 @@ The portal is intended for internal users, not customers. Staff members will be 
 
 ## Proposed Tech Stack:
   Python
+  
   Flask
+  
   SQLite
+  
   HTML/CSS
+  
   Bootstrap
+  
   Github (for version control)
+  
 
 ## Main Features: (tbu)
   Internal user login
