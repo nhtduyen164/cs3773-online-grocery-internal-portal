@@ -1,5 +1,71 @@
 # User Stories and Test Cases
 
+## Login and User Management
+
+1. **Internal User Login**
+
+As a store employee, I want to log in with a username and password so that I can access the internal grocery store portal securely.
+
+**Test Case:** 
+* Successful login
+* Login with incorrect password
+* Login with unknown username
+* Protected page access without login
+
+2. **Internal User Logout**
+
+As a store employee, I want to log out of the internal portal so that my account cannot be used by another person on the same device.
+
+**Test Case:**
+* Successful logout
+* Access protected page after logout
+
+## Product Catalog Management
+
+1. **View Product Catalog**
+
+As a store employee, I want to view the list of grocery products, so that I can see the products currently stored in the system.
+
+**Test Case:**
+
+* View product catalog with existing products
+* View product catalog when no products exist
+* View product catalog without login
+
+## Add New Product
+
+As a store employee, I want to add a new grocery product to the catalog, so that the online grocery store can offer new items for sale.
+
+**Test Case:**
+
+* Add product with valid information
+* Add product without product name
+* Add product with invalid price
+* Add product with invalid quantity
+* Add product without login
+
+## Edit Existing Product
+
+As a store employee, I want to update an existing product’s information, so that the catalog stays accurate when product details change.
+
+**Test Case:** 
+
+* Edit product with valid updated information
+* Edit product with invalid price
+* Edit product with invalid quantity
+* Edit product without login
+
+## Mark Product as Out of Stock/Discontinued
+
+As a store employee, I want to mark a product as out of stock or discontinued, so that the catalog correctly shows whether the product is currently available.
+
+**Test Case:**
+
+* Mark product as out-of-stock
+* Mark product as discontinued
+* Change product status back to available
+* Change product status without login
+
 ## Inventory, Discounts, Search, and Orders
 
 1. **Track Stock Level**
