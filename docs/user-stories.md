@@ -8,10 +8,18 @@
 
    **Test Case:**
    
-   * Successful login
-   * Login with incorrect password
-   * Login with unknown username
-   * Protected page access without login
+   * Create a preloaded user account with username “employee1” and password “password123”.
+   * Open the login page.
+   * Enter “employee1” in the username text box.
+   * Enter “password123” in the password text box.
+   * Click the login button.
+   * I should be taken to the internal portal dashboard.
+   * Log out of the system.
+   * Open the login page again.
+   * Enter “employee1” in the username text box.
+   * Enter “password1234” in the password text box.
+   * Click the login button.
+   * I should see an error message saying that the username or password is incorrect.
 
 2. **Internal User Logout**
 
@@ -19,54 +27,111 @@
 
    **Test Case:**
    
-   * Successful logout
-   * Access protected page after logout
+   * Log in with a valid staff account.
+   * I should be taken to the internal portal dashboard.
+   * Click the logout button.
+   * I should be redirected to the login page.
+   * Try to open the product catalog page again.
+   * I should be redirected to the login page because I am no longer logged in.
+
+3. **Prevent Unauthorized Access**
+
+   As a store employee, I want the system to block users who are not logged in so that only authorized staff can access internal store information.
+
+   **Test Case:**
+
+   * Open the system without logging in.
+   * Try to open the product catalog page.
+   * I should be redirected to the login page.
+   * Try to open the add product page without logging in.
+   * I should be redirected to the login page.
+   * Log in with a valid staff account.
+   * Open the product catalog page.
+   * I should be able to view the product catalog.
 
 ## Product Catalog Management
 
 1. **View Product Catalog**
 
-   As a store employee, I want to view the list of grocery products, so that I can see the products currently stored in the system.
+   As a store employee, I want to view the list of grocery products so that I can see the products currently stored in the system.
 
    **Test Case:**
 
-   * View product catalog with existing products
-   * View product catalog when no products exist
-   * View product catalog without login
+   * Log in with a valid staff account.
+   * Create a product named “Apples” with image “apples.jpg”, price 2.99, quantity 25, and description “Fresh red apples”.
+   * Create a product named “Milk” with image “milk.jpg”, price 3.49, quantity 10, and description “One gallon of whole milk”.
+   * Open the product catalog page.
+   * I should see “Apples” listed with image, price 2.99, quantity 25, and description “Fresh red apples”.
+   * I should see “Milk” listed with image, price 3.49, quantity 10, and description “One gallon of whole milk”.
 
 2. **Add New Product**
 
-   As a store employee, I want to add a new grocery product to the catalog, so that the online grocery store can offer new items for sale.
+   As a store employee, I want to add a new grocery product to the catalog so that the store can offer new items for sale.
 
    **Test Case:**
 
-   * Add product with valid information
-   * Add product without product name
-   * Add product with invalid price
-   * Add product with invalid quantity
-   * Add product without login
+   * Log in with a valid staff account.
+   * Open the add product page.
+   * Enter “Bananas” in the product name text box.
+   * Upload or enter the image “bananas.jpg”.
+   * Enter 1.49 in the price text box.
+   * Enter 40 in the quantity text box.
+   * Enter “Fresh yellow bananas” in the description text box.
+   * Click the submit button.
+   * I should see a confirmation message that the product was added successfully.
+   * Open the product catalog page.
+   * I should see “Bananas” listed with image, price 1.49, quantity 40, and description “Fresh yellow bananas”.
 
-3. **Edit Existing Product**
+3. **Reject Invalid Product Information**
 
-   As a store employee, I want to update an existing product’s information, so that the catalog stays accurate when product details change.
+   As a store employee, I want the system to reject invalid product information so that incorrect product data is not saved in the catalog.
+
+   **Test Case:**
+
+   * Log in with a valid staff account.
+   * Open the add product page.
+   * Leave the product name text box empty.
+   * Enter -2.99 in the price text box.
+   * Enter 5.5 in the quantity text box.
+   * Click the submit button.
+   * I should see an error message saying the product name is required.
+   * I should see an error message saying the price must be a valid non-negative number.
+   * I should see an error message saying the quantity must be a valid whole number.
+   * Open the product catalog page.
+   * I should not see the invalid product listed in the catalog.
+   
+4. **Edit Existing Product**
+
+   As a store employee, I want to update an existing product’s information so that the catalog stays accurate when product details change.
    
    **Test Case:** 
    
-   * Edit product with valid updated information
-   * Edit product with invalid price
-   * Edit product with invalid quantity
-   * Edit product without login
+   * Log in with a valid staff account.
+   * Create a product named “Orange Juice” with image “orangejuice.jpg”, price 4.99, quantity 12, and description “Half gallon orange juice”.
+   * Open the product catalog page.
+   * Click the edit button for “Orange Juice”.
+   * Change the price to 5.49.
+   * Change the quantity to 8.
+   * Change the description to “Half gallon pulp-free orange juice”.
+   * Click the save button.
+   * I should see a confirmation message that the product was updated successfully.
+   * Open the product catalog page.
+   * I should see “Orange Juice” listed with price 5.49, quantity 8, and description “Half gallon pulp-free orange juice”.
 
-4. **Mark Product as Out of Stock/Discontinued**
+5. **Mark Product as Out of Stock/Discontinued**
 
-   As a store employee, I want to mark a product as out of stock or discontinued, so that the catalog correctly shows whether the product is currently available.
+   As a store employee, I want to mark a product as out of stock or discontinued so that the catalog correctly shows whether the product is currently available.
    
    **Test Case:**
    
-   * Mark product as out-of-stock
-   * Mark product as discontinued
-   * Change product status back to available
-   * Change product status without login
+   * Log in with a valid staff account.
+   * Create a product named “Strawberries” with quantity 15.
+   * Open the product catalog page.
+   * Change the status of “Strawberries” to out of stock.
+   * I should see “Strawberries” listed as out of stock in the catalog.
+   * Change the status of “Strawberries” to discontinued.
+   * I should see “Strawberries” listed as discontinued in the catalog.
+   * The status change should be saved in the database.
 
 ## Inventory, Discounts, Search, and Orders
 
