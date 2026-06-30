@@ -58,11 +58,11 @@
    **Test Case:**
 
    * Log in with a valid staff account.
-   * Create a product named “Apples” with image “apples.jpg”, price 2.99, quantity 25, and description “Fresh red apples”.
-   * Create a product named “Milk” with image “milk.jpg”, price 3.49, quantity 10, and description “One gallon of whole milk”.
+   * Create a product named “Apples” with image “apples.jpg”, price $2.99, quantity 25, and description “Fresh red apples”.
+   * Create a product named “Milk” with image “milk.jpg”, price $3.49, quantity 10, and description “One gallon of whole milk”.
    * Open the product catalog page.
-   * I should see “Apples” listed with image, price 2.99, quantity 25, and description “Fresh red apples”.
-   * I should see “Milk” listed with image, price 3.49, quantity 10, and description “One gallon of whole milk”.
+   * I should see “Apples” listed with image, price $2.99, quantity 25, and description “Fresh red apples”.
+   * I should see “Milk” listed with image, price $3.49, quantity 10, and description “One gallon of whole milk”.
 
 2. **Add New Product**
 
@@ -80,7 +80,7 @@
    * Click the submit button.
    * I should see a confirmation message that the product was added successfully.
    * Open the product catalog page.
-   * I should see “Bananas” listed with image, price 1.49, quantity 40, and description “Fresh yellow bananas”.
+   * I should see “Bananas” listed with image, price $1.49, quantity 40, and description “Fresh yellow bananas”.
 
 3. **Reject Invalid Product Information**
 
@@ -107,16 +107,16 @@
    **Test Case:** 
    
    * Log in with a valid staff account.
-   * Create a product named “Orange Juice” with image “orangejuice.jpg”, price 4.99, quantity 12, and description “Half gallon orange juice”.
+   * Create a product named “Orange Juice” with image “orangejuice.jpg”, price $4.99, quantity 12, and description “Half gallon orange juice”.
    * Open the product catalog page.
    * Click the edit button for “Orange Juice”.
-   * Change the price to 5.49.
+   * Change the price to $5.49.
    * Change the quantity to 8.
    * Change the description to “Half gallon pulp-free orange juice”.
    * Click the save button.
    * I should see a confirmation message that the product was updated successfully.
    * Open the product catalog page.
-   * I should see “Orange Juice” listed with price 5.49, quantity 8, and description “Half gallon pulp-free orange juice”.
+   * I should see “Orange Juice” listed with price $5.49, quantity 8, and description “Half gallon pulp-free orange juice”.
 
 5. **Mark Product as Out of Stock/Discontinued**
 
