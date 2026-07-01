@@ -9,21 +9,23 @@ The portal is intended for internal users, not customers. Staff members will be 
 ### Proposed Tech Stack:
   - Python
   - Flask
-  -  SQLite
+  - SQLite
   - HTML/CSS
   - Bootstrap
   - Github (for version control)
 
-### Main Features: (tbu)
-  - Internal user login
-  - Product catalog management
+### Main Features
+  - Login/Users and Product Catalog
+  - Inventory, Discounts, Search, Orders
   - ...
 
 ### Milestone 1 Deliverables: Testable User Stories **(Due June 30)**
-  - [ ] Testable User Stories
-  - [ ] Natural language test cases for each user story
-  - [ ] UML Class Diagram
-  - [ ] UML State Diagram (for one important class)
+  - [x] Testable User Stories
+  - [x] Natural language test cases for each user story
+  - [x] UML Class Diagram
+  - [x] UML State Diagram (for one important class)
+
+### Milestone 2 Deliverables: Implementation and Testing (comming up)
 
 ### Structure
   ```
@@ -39,5 +41,5 @@ The portal is intended for internal users, not customers. Staff members will be 
   - Esteban Fuentes
   - Myar Nguyen
 
-### How to Run (tbu)
+### How to Run
   
