@@ -14,9 +14,9 @@ Since the final project deadline is July 30, the team will use a compressed thre
 
 | ID   | Task / User Story                                                               | Priority | Assigned To | Status | Sprint   |
 | ---- | ------------------------------------------------------------------------------- | -------- | ----------- | ------ | -------- |
-| B001 | Set up Flask project structure                                                  | High     | Cameron         | To Do  | Sprint 1 |
-| B002 | Create `requirements.txt` with required Python packages                         | High     | TBD         | To Do  | Sprint 1 |
-| B003 | Create basic SQLite database connection/setup script                            | High     | TBD         | To Do  | Sprint 1 |
+| B001 | Set up Flask project structure                                                  | High     | Cameron         | Done  | Sprint 1 |
+| B002 | Create `requirements.txt` with required Python packages                         | High     | Cameron         | Done  | Sprint 1 |
+| B003 | Create basic SQLite database connection/setup script                            | High     | Cameron         | To Do  | Sprint 1 |
 | B004 | Create database tables for users, products, discounts, orders, and order items  | High     | TBD         | To Do  | Sprint 1 |
 | B005 | Add seed data for internal users, products, and customer orders                 | High     | TBD         | To Do  | Sprint 1 |
 | B006 | Create shared Bootstrap layout/base template                                    | High     | TBD         | To Do  | Sprint 1 |
