@@ -1,6 +1,7 @@
 from pathlib import Path
 from flask import Flask
 
+from grocery_portal.main.routes import products_bp
 
 def create_app():
     project_root = Path(__file__).resolve().parents[2]
@@ -24,5 +25,6 @@ def create_app():
 
     from grocery_portal.main.routes import main_bp
     app.register_blueprint(main_bp)
-
+    app.register_blueprint(products_bp)
+    
     return app
