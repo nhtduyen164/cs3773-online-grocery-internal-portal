@@ -23,7 +23,7 @@ Since the final project deadline is July 30, the team will use a compressed thre
 | B007 | Create login page                                                               | High     | TBD         | To Do  | Sprint 1 |
 | B008 | Add login/logout session handling                                               | High     | TBD         | To Do  | Sprint 1 |
 | B009 | Create dashboard page after successful login                                    | Medium   | TBD         | To Do  | Sprint 1 |
-| B010 | Create product catalog page                                                     | High     | TBD         | To Do  | Sprint 1 |
+| B010 | Create product catalog page                                                     | High     | Esteban         | In Progress | Sprint 1 |
 | B011 | Add product creation form                                                       | High     | TBD         | To Do  | Sprint 2 |
 | B012 | Add product edit/update form                                                    | High     | TBD         | To Do  | Sprint 2 |
 | B013 | Store and display product name, description, image path, price, and quantity    | High     | TBD         | To Do  | Sprint 2 |
