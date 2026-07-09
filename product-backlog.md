@@ -17,9 +17,9 @@ Since the final project deadline is July 30, the team will use a compressed thre
 | B001 | Set up Flask project structure                                                  | High     | Cameron         | Done  | Sprint 1 |
 | B002 | Create `requirements.txt` with required Python packages                         | High     | Cameron         | Done  | Sprint 1 |
 | B003 | Create basic SQLite database connection/setup script                            | High     | Cameron         | Done  | Sprint 1 |
-| B004 | Create database tables for users, products, discounts, orders, and order items  | High     | TBD         | To Do  | Sprint 1 |
-| B005 | Add seed data for internal users, products, and customer orders                 | High     | TBD         | To Do  | Sprint 1 |
-| B006 | Create shared Bootstrap layout/base template                                    | High     | TBD         | To Do  | Sprint 1 |
+| B004 | Create database tables for users, products, discounts, orders, and order items  | High     | Esteban         | Done  | Sprint 1 |
+| B005 | Add seed data for internal users, products, and customer orders                 | High     | Esteban         | Done  | Sprint 1 |
+| B006 | Create shared Bootstrap layout/base template                                    | High     | Esteban        | Done  | Sprint 1 |
 | B007 | Create login page                                                               | High     | TBD         | To Do  | Sprint 1 |
 | B008 | Add login/logout session handling                                               | High     | TBD         | To Do  | Sprint 1 |
 | B009 | Create dashboard page after successful login                                    | Medium   | TBD         | To Do  | Sprint 1 |
