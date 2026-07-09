@@ -20,10 +20,10 @@ Since the final project deadline is July 30, the team will use a compressed thre
 | B004 | Create database tables for users, products, discounts, orders, and order items  | High     | Esteban         | In Progress  | Sprint 1 |
 | B005 | Add seed data for internal users, products, and customer orders                 | High     | Esteban         | In Progress  | Sprint 1 |
 | B006 | Create shared Bootstrap layout/base template                                    | High     | Esteban         | In Progress  | Sprint 1 |
-| B007 | Create login page                                                               | High     | Myar            | In Progress  | Sprint 1 |
-| B008 | Add login/logout session handling                                               | High     | Myar            | In Progress  | Sprint 1 |
-| B009 | Create dashboard page after successful login                                    | Medium   | Myar            | In Progress  | Sprint 1 |
-| B010 | Create product catalog page                                                     | High     | TBD         | To Do  | Sprint 1 |
+| B007 | Create login page                                                               | High     | Myar            | Done  | Sprint 1 |
+| B008 | Add login/logout session handling                                               | High     | Myar            | Done  | Sprint 1 |
+| B009 | Create dashboard page after successful login                                    | Medium   | Myar            | Done  | Sprint 1 |
+| B010 | Create product catalog page                                                     | High     | Esteban         | In Progress  | Sprint 1 |
 | B011 | Add product creation form                                                       | High     | TBD         | To Do  | Sprint 2 |
 | B012 | Add product edit/update form                                                    | High     | TBD         | To Do  | Sprint 2 |
 | B013 | Store and display product name, description, image path, price, and quantity    | High     | TBD         | To Do  | Sprint 2 |
