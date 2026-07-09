@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Dashboard</h1>
+
+<p>Welcome, {{ username }}.</p>
+
+<p>This is the internal portal dashboard for the staff.</p>
+
+<div class="row mt-4">
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5>Product Catalog</h5>
+                <p>View, add, and update grocery products.</p>
+                <button class="btn btn-success" disabled>
+                    Coming Soon
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5>Inventory</h5>
+                <p>Track product stock levels.</p>
+                <button class="btn btn-secondary" disabled>
+                    Coming Soon
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5>Orders</h5>
+                <p>Browse and execute customer orders.</p>
+                <button class="btn btn-secondary" disabled>
+                    Coming Soon
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
