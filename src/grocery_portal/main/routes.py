@@ -6,7 +6,7 @@ from grocery_portal.db import get_db
 main_bp = Blueprint("main", __name__)
 
 # Temporary users for sprint 1 login testing
-# Later this can be replaced with users from the database
+# This can be replaced with users from the database later
 USERS = {
     "employee1": "password123",
     "manager1": "admin123"
@@ -59,3 +59,107 @@ def logout():
 @login_required
 def dashboard():
     return render_template("dashboard.html", username=session["username"])
+
+@main_bp.route("/products/new", methods=["GET", "POST"])
+@login_required
+def create_product():
+    db = get_db()
+
+    if request.method == "POST":
+        name = request.form.get("name", "").strip()
+        description = request.form.get("description", "").strip()
+        image = request.form.get("image", "").strip()
+        price = request.form.get("price", "").strip()
+        stock_quantity = request.form.get("stock_quantity", "").strip()
+        status = request.form.get("status", "Available")
+
+        if not name:
+            flash("Product name is required.", "danger")
+            return render_template("product_form.html", product=None, form_type="Create")
+
+        try:
+            price = float(price)
+            if price < 0:
+                raise ValueError
+        except ValueError:
+            flash("Price must be a valid non-negative number.", "danger")
+            return render_template("product_form.html", product=None, form_type="Create")
+
+        try:
+            stock_quantity = int(stock_quantity)
+            if stock_quantity < 0:
+                raise ValueError
+        except ValueError:
+            flash("Quantity must be a valid whole number.", "danger")
+            return render_template("product_form.html", product=None, form_type="Create")
+
+        db.execute(
+            """
+            INSERT INTO products (name, description, image, price, stock_quantity, status)
+            VALUES (?, ?, ?, ?, ?, ?)
+            """,
+            (name, description, image, price, stock_quantity, status),
+        )
+        db.commit()
+
+        flash("Product created successfully.", "success")
+        return redirect(url_for("main.products"))
+
+    return render_template("product_form.html", product=None, form_type="Create")
+
+@main_bp.route("/products/<int:product_id>/edit", methods=["GET", "POST"])
+@login_required
+def edit_product(product_id):
+    db = get_db()
+
+    product = db.execute(
+        "SELECT * FROM products WHERE id = ?",
+        (product_id,),
+    ).fetchone()
+
+    if product is None:
+        flash("Product not found.", "danger")
+        return redirect(url_for("main.products"))
+
+    if request.method == "POST":
+        name = request.form.get("name", "").strip()
+        description = request.form.get("description", "").strip()
+        image = request.form.get("image", "").strip()
+        price = request.form.get("price", "").strip()
+        stock_quantity = request.form.get("stock_quantity", "").strip()
+        status = request.form.get("status", "Available")
+
+        if not name:
+            flash("Product name is required.", "danger")
+            return render_template("product_form.html", product=product, form_type="Edit")
+
+        try:
+            price = float(price)
+            if price < 0:
+                raise ValueError
+        except ValueError:
+            flash("Price must be a valid non-negative number.", "danger")
+            return render_template("product_form.html", product=product, form_type="Edit")
+
+        try:
+            stock_quantity = int(stock_quantity)
+            if stock_quantity < 0:
+                raise ValueError
+        except ValueError:
+            flash("Quantity must be a valid whole number.", "danger")
+            return render_template("product_form.html", product=product, form_type="Edit")
+
+        db.execute(
+            """
+            UPDATE products
+            SET name = ?, description = ?, image = ?, price = ?, stock_quantity = ?, status = ?
+            WHERE id = ?
+            """,
+            (name, description, image, price, stock_quantity, status, product_id),
+        )
+        db.commit()
+
+        flash("Product updated successfully.", "success")
+        return redirect(url_for("main.products"))
+
+    return render_template("product_form.html", product=product, form_type="Edit")
