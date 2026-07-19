@@ -50,6 +50,44 @@
     </div>
 </div>
 
+<form
+    method="GET"
+    action="{{ url_for('main.products') }}"
+    class="row g-2 mb-4 align-items-center"
+>
+    <div class="col-md-6 col-lg-5">
+        <label for="search" class="visually-hidden">
+            Search products
+        </label>
+
+        <input
+            type="search"
+            class="form-control"
+            id="search"
+            name="search"
+            value="{{ search }}"
+            placeholder="Search by product name or description"
+        >
+    </div>
+
+    <div class="col-auto">
+        <button type="submit" class="btn btn-success">
+            Search
+        </button>
+    </div>
+
+    {% if search %}
+        <div class="col-auto">
+            <a
+                href="{{ url_for('main.products') }}"
+                class="btn btn-outline-secondary"
+            >
+                Clear
+            </a>
+        </div>
+    {% endif %}
+</form>
+
 <div class="row g-4">
     {% if products %}
     {% for product in products %}
@@ -122,7 +160,15 @@
     {% else %}
     <div class="col-12 text-center py-5">
         <div class="card p-5 border-0 shadow-sm bg-white">
-            <p class="text-muted mb-0">No dynamic database records found. Verify your Flask route passes a context list named <code>products</code>.</p>
+            {% if search %}
+                <p class="text-muted mb-0">
+                    No products matched “{{ search }}”.
+                </p>
+            {% else %}
+                <p class="text-muted mb-0">
+                    No products are currently available.
+                </p>
+            {% endif %}
         </div>
     </div>
     {% endif %}

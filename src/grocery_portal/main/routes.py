@@ -65,13 +65,33 @@ def dashboard():
 def products():
     db = get_db()
 
-    products = db.execute(
-        """
-        SELECT id, name, description, image_path, price, stock_quantity, created_at
+    search = request.args.get("search", "").strip()
+
+    query = """
+        SELECT id,
+               name,
+               description,
+               image_path,
+               price,
+               stock_quantity,
+               created_at
         FROM products
-        ORDER BY name
+    """
+
+    parameters = []
+
+    if search:
+        query += """
+            WHERE name LIKE ?
+               OR description LIKE ?
         """
-    ).fetchall()
+
+        search_pattern = f"%{search}%"
+        parameters.extend([search_pattern, search_pattern])
+
+    query += " ORDER BY name"
+
+    products = db.execute(query, parameters).fetchall()
 
     total_skus = len(products)
 
@@ -85,6 +105,7 @@ def products():
         products=products,
         total_skus=total_skus,
         low_stock_count=low_stock_count,
+        search=search,
     )
 
 
