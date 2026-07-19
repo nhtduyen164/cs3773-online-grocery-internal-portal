@@ -67,7 +67,7 @@ def products():
 
     products = db.execute(
         """
-        SELECT id, name, description, price, stock_quantity, created_at
+        SELECT id, name, description, image_path, price, stock_quantity, created_at
         FROM products
         ORDER BY name
         """
@@ -96,6 +96,10 @@ def create_product():
     if request.method == "POST":
         name = request.form.get("name", "").strip()
         description = request.form.get("description", "").strip()
+        image_path = (
+            request.form.get("image_path", "").strip()
+            or "images/products/placeholder.png"
+        )
         price = request.form.get("price", "").strip()
         stock_quantity = request.form.get("stock_quantity", "").strip()
 
@@ -121,10 +125,10 @@ def create_product():
 
         db.execute(
             """
-            INSERT INTO products (name, description, price, stock_quantity)
-            VALUES (?, ?, ?, ?)
+            INSERT INTO products (name, description, image_path, price, stock_quantity)
+            VALUES (?, ?, ?, ?, ?)
             """,
-            (name, description, price, stock_quantity),
+            (name, description, image_path, price, stock_quantity),
         )
         db.commit()
 
@@ -151,6 +155,10 @@ def edit_product(product_id):
     if request.method == "POST":
         name = request.form.get("name", "").strip()
         description = request.form.get("description", "").strip()
+        image_path = (
+            request.form.get("image_path", "").strip()
+            or "images/products/placeholder.png"
+        )
         price = request.form.get("price", "").strip()
         stock_quantity = request.form.get("stock_quantity", "").strip()
 
@@ -177,10 +185,10 @@ def edit_product(product_id):
         db.execute(
             """
             UPDATE products
-            SET name = ?, description = ?, price = ?, stock_quantity = ?
+            SET name = ?, description = ?, image_path = ?, price = ?, stock_quantity = ?
             WHERE id = ?
             """,
-            (name, description, price, stock_quantity, product_id),
+            (name, description, image_path, price, stock_quantity, product_id),
         )
         db.commit()
 

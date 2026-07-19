@@ -29,6 +29,25 @@
     </div>
 
     <div class="mb-3">
+        <label for="image_path" class="form-label">
+            Image Path
+        </label>
+
+        <input
+            type="text"
+            class="form-control"
+            id="image_path"
+            name="image_path"
+            value="{{ request.form.get('image_path', product['image_path'] if product else '') }}"
+            placeholder="images/products/placeholder.png"
+        >
+
+        <div class="form-text">
+            Enter a path relative to the static folder.
+        </div>
+    </div>
+
+    <div class="mb-3">
         <label for="price" class="form-label">Price</label>
         <input
             type="number"
