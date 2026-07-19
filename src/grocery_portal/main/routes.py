@@ -12,6 +12,7 @@ USERS = {
     "manager1": "admin123"
 }
 
+
 def login_required(route_function):
     @wraps(route_function)
     def wrapper(*args, **kwargs):
@@ -22,15 +23,13 @@ def login_required(route_function):
 
     return wrapper
 
-# @main_bp.route("/")
-# def index():
-#    return render_template("index.html")
 
 @main_bp.route("/")
 def index():
     if "username" in session:
         return redirect(url_for("main.dashboard"))
     return redirect(url_for("main.login"))
+
 
 @main_bp.route("/login", methods=["GET", "POST"])
 def login():
@@ -60,6 +59,7 @@ def logout():
 def dashboard():
     return render_template("dashboard.html", username=session["username"])
 
+
 @main_bp.route("/products")
 @login_required
 def products():
@@ -67,13 +67,26 @@ def products():
 
     products = db.execute(
         """
-        SELECT id, name, description, image, price, stock_quantity, status
+        SELECT id, name, description, price, stock_quantity, created_at
         FROM products
         ORDER BY name
         """
     ).fetchall()
 
-    return render_template("products.html", products=products)
+    total_skus = len(products)
+
+    low_stock_count = sum(
+        1 for product in products
+        if 0 < product["stock_quantity"] <= 50
+    )
+
+    return render_template(
+        "products.html",
+        products=products,
+        total_skus=total_skus,
+        low_stock_count=low_stock_count,
+    )
+
 
 @main_bp.route("/products/new", methods=["GET", "POST"])
 @login_required
@@ -83,10 +96,8 @@ def create_product():
     if request.method == "POST":
         name = request.form.get("name", "").strip()
         description = request.form.get("description", "").strip()
-        image = request.form.get("image", "").strip()
         price = request.form.get("price", "").strip()
         stock_quantity = request.form.get("stock_quantity", "").strip()
-        status = request.form.get("status", "Available")
 
         if not name:
             flash("Product name is required.", "danger")
@@ -110,10 +121,10 @@ def create_product():
 
         db.execute(
             """
-            INSERT INTO products (name, description, image, price, stock_quantity, status)
-            VALUES (?, ?, ?, ?, ?, ?)
+            INSERT INTO products (name, description, price, stock_quantity)
+            VALUES (?, ?, ?, ?)
             """,
-            (name, description, image, price, stock_quantity, status),
+            (name, description, price, stock_quantity),
         )
         db.commit()
 
@@ -121,6 +132,7 @@ def create_product():
         return redirect(url_for("main.products"))
 
     return render_template("product_form.html", product=None, form_type="Create")
+
 
 @main_bp.route("/products/<int:product_id>/edit", methods=["GET", "POST"])
 @login_required
@@ -139,10 +151,8 @@ def edit_product(product_id):
     if request.method == "POST":
         name = request.form.get("name", "").strip()
         description = request.form.get("description", "").strip()
-        image = request.form.get("image", "").strip()
         price = request.form.get("price", "").strip()
         stock_quantity = request.form.get("stock_quantity", "").strip()
-        status = request.form.get("status", "Available")
 
         if not name:
             flash("Product name is required.", "danger")
@@ -167,10 +177,10 @@ def edit_product(product_id):
         db.execute(
             """
             UPDATE products
-            SET name = ?, description = ?, image = ?, price = ?, stock_quantity = ?, status = ?
+            SET name = ?, description = ?, price = ?, stock_quantity = ?
             WHERE id = ?
             """,
-            (name, description, image, price, stock_quantity, status, product_id),
+            (name, description, price, stock_quantity, product_id),
         )
         db.commit()
 

@@ -21,15 +21,30 @@
 <div class="row g-3 mb-4">
     <div class="col-6 col-md-3">
         <div class="p-3 bg-white border rounded shadow-sm">
-            <small class="text-muted text-uppercase fw-bold d-block mb-1" style="font-size: 0.75rem;">Total SKUs</small>
-            <span class="fs-4 fw-bold text-dark">{{ products|length | default(8) }}</span>
+            <small
+                class="text-muted text-uppercase fw-bold d-block mb-1"
+                style="font-size: 0.75rem;"
+            >
+                Total SKUs
+            </small>
+
+            <span class="fs-4 fw-bold text-dark">
+                {{ total_skus }}
+            </span>
         </div>
     </div>
+
     <div class="col-6 col-md-3">
         <div class="p-3 bg-white border rounded shadow-sm">
-            <small class="text-muted text-uppercase fw-bold d-block mb-1" style="font-size: 0.75rem;">Low Stock Alerts</small>
+            <small
+                class="text-muted text-uppercase fw-bold d-block mb-1"
+                style="font-size: 0.75rem;"
+            >
+                Low Stock Alerts
+            </small>
+
             <span class="fs-4 fw-bold text-danger">
-                1 
+                {{ low_stock_count }}
             </span>
         </div>
     </div>
