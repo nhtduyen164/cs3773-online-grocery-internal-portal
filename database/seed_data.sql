@@ -11,15 +11,22 @@ INSERT INTO users (id, username, email, password_hash, role) VALUES
 -- ---------------------------------------------------------------------------
 -- Products (grocery store)
 -- ---------------------------------------------------------------------------
-INSERT INTO products (id, name, description, price, stock_quantity) VALUES
-    (1, 'Organic Bananas',        'Sold per pound, organic',            0.59, 150),
-    (2, 'Whole Milk (1 Gallon)',  'Vitamin D whole milk',               3.49, 80),
-    (3, 'Sourdough Bread',        'Fresh baked in-store daily',         4.99, 45),
-    (4, 'Free-Range Eggs (Dozen)','Large brown eggs',                   5.29, 60),
-    (5, 'Cheddar Cheese Block',   'Sharp cheddar, 8oz block',           6.79, 40),
-    (6, 'Roma Tomatoes',          'Sold per pound',                     1.99, 120),
-    (7, 'Chicken Breast',         'Boneless, skinless, per pound',      4.49, 70),
-    (8, 'Ground Coffee (12oz)',   'Medium roast, whole bean or ground', 8.99, 55);
+INSERT INTO products (
+    id,
+    name,
+    description,
+    image_path,
+    price,
+    stock_quantity
+) VALUES
+    (1, 'Organic Bananas',         'Sold per pound, organic',            'images/products/placeholder.png', 0.59, 150),
+    (2, 'Whole Milk (1 Gallon)',   'Vitamin D whole milk',               'images/products/placeholder.png', 3.49, 80),
+    (3, 'Sourdough Bread',         'Fresh baked in-store daily',         'images/products/placeholder.png', 4.99, 45),
+    (4, 'Free-Range Eggs (Dozen)', 'Large brown eggs',                   'images/products/placeholder.png', 5.29, 60),
+    (5, 'Cheddar Cheese Block',    'Sharp cheddar, 8oz block',           'images/products/placeholder.png', 6.79, 40),
+    (6, 'Roma Tomatoes',           'Sold per pound',                     'images/products/placeholder.png', 1.99, 120),
+    (7, 'Chicken Breast',          'Boneless, skinless, per pound',      'images/products/placeholder.png', 4.49, 70),
+    (8, 'Ground Coffee (12oz)',    'Medium roast, whole bean or ground', 'images/products/placeholder.png', 8.99, 55);
 
 -- ---------------------------------------------------------------------------
 -- Discounts

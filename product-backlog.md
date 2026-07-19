@@ -26,11 +26,11 @@ Since the final project deadline is July 30, the team will use a compressed thre
 | B010 | Create product catalog page                                                     | High     | Esteban         | In Progress  | Sprint 1 |
 | B011 | Add product creation form                                                       | High     | Myar            | Done  | Sprint 2 |
 | B012 | Add product edit/update form                                                    | High     | Myar            | Done  | Sprint 2 |
-| B013 | Store and display product name, description, image path, price, and quantity    | High     | Cameron         | In Progress  | Sprint 2 |
-| B014 | Display product availability based on quantity                                  | High     | Cameron         | In Progress  | Sprint 2 |
-| B015 | Add search by product name or description                                       | High     | Cameron         | In Progress  | Sprint 2 |
-| B016 | Add product sorting by price                                                    | Medium   | Cameron         | In Progress  | Sprint 2 |
-| B017 | Add product sorting by availability                                             | Medium   | Cameron         | In Progress  | Sprint 2 |
+| B013 | Store and display product name, description, image path, price, and quantity    | High     | Cameron         | Done  | Sprint 2 |
+| B014 | Display product availability based on quantity                                  | High     | Cameron         | Done  | Sprint 2 |
+| B015 | Add search by product name or description                                       | High     | Cameron         | Done  | Sprint 2 |
+| B016 | Add product sorting by price                                                    | Medium   | Cameron         | Done  | Sprint 2 |
+| B017 | Add product sorting by availability                                             | Medium   | Cameron         | Done  | Sprint 2 |
 | B041 | Replace temporary hardcoded login with database-backed user authentication      | High     | TBD         | To Do  | Sprint 2 |
 | B018 | Add discount code creation                                                      | Medium   | TBD         | To Do  | Sprint 2 |
 | B019 | Add sale item support for products                                              | Medium   | TBD         | To Do  | Sprint 2 |

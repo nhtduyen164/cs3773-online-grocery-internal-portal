@@ -65,13 +65,44 @@ def dashboard():
 def products():
     db = get_db()
 
-    products = db.execute(
-        """
-        SELECT id, name, description, price, stock_quantity, created_at
+    search = request.args.get("search", "").strip()
+    sort = request.args.get("sort", "name")
+
+    sort_options = {
+        "name": "name ASC",
+        "price_asc": "price ASC",
+        "price_desc": "price DESC",
+        "availability": "stock_quantity DESC",
+    }
+
+    if sort not in sort_options:
+        sort = "name"
+
+    query = """
+        SELECT id,
+               name,
+               description,
+               image_path,
+               price,
+               stock_quantity,
+               created_at
         FROM products
-        ORDER BY name
+    """
+
+    parameters = []
+
+    if search:
+        query += """
+            WHERE name LIKE ?
+               OR description LIKE ?
         """
-    ).fetchall()
+
+        search_pattern = f"%{search}%"
+        parameters.extend([search_pattern, search_pattern])
+
+    query += f" ORDER BY {sort_options[sort]}"
+
+    products = db.execute(query, parameters).fetchall()
 
     total_skus = len(products)
 
@@ -85,6 +116,8 @@ def products():
         products=products,
         total_skus=total_skus,
         low_stock_count=low_stock_count,
+        search=search,
+        sort=sort,
     )
 
 
@@ -96,6 +129,10 @@ def create_product():
     if request.method == "POST":
         name = request.form.get("name", "").strip()
         description = request.form.get("description", "").strip()
+        image_path = (
+            request.form.get("image_path", "").strip()
+            or "images/products/placeholder.png"
+        )
         price = request.form.get("price", "").strip()
         stock_quantity = request.form.get("stock_quantity", "").strip()
 
@@ -121,10 +158,10 @@ def create_product():
 
         db.execute(
             """
-            INSERT INTO products (name, description, price, stock_quantity)
-            VALUES (?, ?, ?, ?)
+            INSERT INTO products (name, description, image_path, price, stock_quantity)
+            VALUES (?, ?, ?, ?, ?)
             """,
-            (name, description, price, stock_quantity),
+            (name, description, image_path, price, stock_quantity),
         )
         db.commit()
 
@@ -151,6 +188,10 @@ def edit_product(product_id):
     if request.method == "POST":
         name = request.form.get("name", "").strip()
         description = request.form.get("description", "").strip()
+        image_path = (
+            request.form.get("image_path", "").strip()
+            or "images/products/placeholder.png"
+        )
         price = request.form.get("price", "").strip()
         stock_quantity = request.form.get("stock_quantity", "").strip()
 
@@ -177,10 +218,10 @@ def edit_product(product_id):
         db.execute(
             """
             UPDATE products
-            SET name = ?, description = ?, price = ?, stock_quantity = ?
+            SET name = ?, description = ?, image_path = ?, price = ?, stock_quantity = ?
             WHERE id = ?
             """,
-            (name, description, price, stock_quantity, product_id),
+            (name, description, image_path, price, stock_quantity, product_id),
         )
         db.commit()
 
