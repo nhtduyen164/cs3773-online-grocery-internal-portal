@@ -60,6 +60,21 @@ def logout():
 def dashboard():
     return render_template("dashboard.html", username=session["username"])
 
+@main_bp.route("/products")
+@login_required
+def products():
+    db = get_db()
+
+    products = db.execute(
+        """
+        SELECT id, name, description, image, price, stock_quantity, status
+        FROM products
+        ORDER BY name
+        """
+    ).fetchall()
+
+    return render_template("products.html", products=products)
+
 @main_bp.route("/products/new", methods=["GET", "POST"])
 @login_required
 def create_product():
