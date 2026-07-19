@@ -95,7 +95,18 @@
                     </div>
                     <div class="text-end">
                         <span class="text-muted d-block small" style="font-size: 0.75rem;">QTY ON HAND</span>
-                        <span class="fw-semibold {% if product.stock_quantity <= 50 %}text-danger{% else %}text-dark{% endif %}">{{ product.stock_quantity }}</span>
+                        <span
+                            class="fw-semibold
+                            {% if product.stock_quantity == 0 %}
+                                text-danger
+                            {% elif product.stock_quantity <= 50 %}
+                                text-warning
+                            {% else %}
+                                text-dark
+                            {% endif %}"
+                        >
+                            {{ product.stock_quantity }}
+                        </span>
                     </div>
                 </div>
             </div>
