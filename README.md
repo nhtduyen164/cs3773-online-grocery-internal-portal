@@ -42,4 +42,76 @@ The portal is intended for internal users, not customers. Staff members will be 
   - Myar Nguyen
 
 ### How to Run
-  
+
+#### 1. Clone the repository and enter the project folder
+
+```bash
+git clone <repository-url>
+cd cs3773-online-grocery-internal-portal
+```
+
+#### 2. Create a virtual environment
+
+```bash
+python3 -m venv .venv
+```
+
+#### 3. Activate the virtual environment
+
+Linux or WSL:
+
+```bash
+source .venv/bin/activate
+```
+
+Windows PowerShell:
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+```
+
+#### 4. Install the required packages
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+#### 5. Initialize the SQLite database
+
+```bash
+flask --app src/app.py init-db
+```
+
+This creates the database tables using `database/schema.sql` and loads the sample data from `database/seed_data.sql`.
+
+Running this command resets the existing database data.
+
+#### 6. Start the application
+
+```bash
+flask --app src/app.py run --debug
+```
+
+#### 7. Open the application
+
+Open the following address in a browser:
+
+```text
+http://127.0.0.1:5000
+```
+
+#### Test Login Accounts
+
+Employee account:
+
+```text
+Username: employee1
+Password: password123
+```
+
+Manager account:
+
+```text
+Username: manager1
+Password: admin123
+```

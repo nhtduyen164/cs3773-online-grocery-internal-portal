@@ -15,9 +15,13 @@
             <div class="card-body">
                 <h5>Product Catalog</h5>
                 <p>View, add, and update grocery products.</p>
-                <button class="btn btn-success" disabled>
-                    Coming Soon
-                </button>
+
+                <a
+                    class="btn btn-success"
+                    href="{{ url_for('main.products') }}"
+                >
+                    View Products
+                </a>
             </div>
         </div>
     </div>
