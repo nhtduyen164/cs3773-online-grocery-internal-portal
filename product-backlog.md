@@ -32,7 +32,7 @@ Since the final project deadline is July 30, the team will use a compressed thre
 | B016 | Add product sorting by price                                                    | Medium   | Cameron         | Done  | Sprint 2 |
 | B017 | Add product sorting by availability                                             | Medium   | Cameron         | Done  | Sprint 2 |
 | B041 | Replace temporary hardcoded login with database-backed user authentication      | High     | TBD         | To Do  | Sprint 2 |
-| B018 | Add discount code creation                                                      | Medium   | Cameron         | To Do  | Sprint 2 |
+| B018 | Add discount code creation                                                      | Medium   | Cameron         | Done  | Sprint 2 |
 | B019 | Add sale item support for products                                              | Medium   | Cameron         | To Do  | Sprint 2 |
 | B020 | Create orders list page showing currently placed orders                         | High     | TBD         | To Do  | Sprint 2 |
 | B021 | Create order detail page showing customer, items, quantities, prices, and total | High     | TBD         | To Do  | Sprint 2 |

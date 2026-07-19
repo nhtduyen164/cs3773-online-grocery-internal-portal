@@ -31,7 +31,7 @@ CREATE TABLE discounts (
     code           TEXT NOT NULL UNIQUE,
     description    TEXT,
     discount_type  TEXT NOT NULL CHECK (discount_type IN ('percentage', 'fixed')),
-    discount_value NUMERIC NOT NULL CHECK (discount_value >= 0),
+    discount_value NUMERIC NOT NULL CHECK (discount_value > 0),
     starts_at      TIMESTAMP,
     expires_at     TIMESTAMP,
     max_uses       INTEGER,

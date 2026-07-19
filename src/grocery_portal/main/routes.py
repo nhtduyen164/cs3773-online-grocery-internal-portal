@@ -3,6 +3,9 @@ from functools import wraps
 from flask import Blueprint, render_template, request, redirect, url_for, session, flash
 from grocery_portal.db import get_db
 
+import sqlite3
+from datetime import datetime
+
 main_bp = Blueprint("main", __name__)
 
 # Temporary users for sprint 1 login testing
@@ -229,3 +232,194 @@ def edit_product(product_id):
         return redirect(url_for("main.products"))
 
     return render_template("product_form.html", product=product, form_type="Edit")
+
+
+@main_bp.route("/discounts")
+@login_required
+def discounts():
+    db = get_db()
+
+    discount_rows = db.execute(
+        """
+        SELECT
+            id,
+            code,
+            description,
+            discount_type,
+            discount_value,
+            starts_at,
+            expires_at,
+            max_uses,
+            times_used,
+            is_active,
+            created_at
+        FROM discounts
+        ORDER BY created_at DESC, code ASC
+        """
+    ).fetchall()
+
+    total_discounts = len(discount_rows)
+    active_discounts = sum(
+        1 for discount in discount_rows if discount["is_active"]
+    )
+
+    return render_template(
+        "discounts.html",
+        discounts=discount_rows,
+        total_discounts=total_discounts,
+        active_discounts=active_discounts,
+    )
+
+
+@main_bp.route("/discounts/new", methods=["GET", "POST"])
+@login_required
+def create_discount():
+    if request.method == "POST":
+        code = request.form.get("code", "").strip().upper()
+        description = request.form.get("description", "").strip()
+        discount_type = request.form.get("discount_type", "").strip()
+        discount_value_input = request.form.get(
+            "discount_value",
+            "",
+        ).strip()
+        starts_at_input = request.form.get("starts_at", "").strip()
+        expires_at_input = request.form.get("expires_at", "").strip()
+        max_uses_input = request.form.get("max_uses", "").strip()
+        is_active = 1 if request.form.get("is_active") else 0
+
+        if not code:
+            flash("Discount code is required.", "danger")
+            return render_template("discount_form.html")
+
+        if any(character.isspace() for character in code):
+            flash(
+                "Discount code cannot contain spaces.",
+                "danger",
+            )
+            return render_template("discount_form.html")
+
+        if discount_type not in ("percentage", "fixed"):
+            flash(
+                "Select a valid discount type.",
+                "danger",
+            )
+            return render_template("discount_form.html")
+
+        try:
+            discount_value = float(discount_value_input)
+
+            if discount_value <= 0:
+                raise ValueError
+        except ValueError:
+            flash(
+                "Discount value must be a number greater than zero.",
+                "danger",
+            )
+            return render_template("discount_form.html")
+
+        if discount_type == "percentage" and discount_value > 100:
+            flash(
+                "Percentage discounts cannot exceed 100%.",
+                "danger",
+            )
+            return render_template("discount_form.html")
+
+        try:
+            starts_at = (
+                datetime.fromisoformat(starts_at_input)
+                if starts_at_input
+                else None
+            )
+        except ValueError:
+            flash(
+                "Start date and time are invalid.",
+                "danger",
+            )
+            return render_template("discount_form.html")
+
+        try:
+            expires_at = (
+                datetime.fromisoformat(expires_at_input)
+                if expires_at_input
+                else None
+            )
+        except ValueError:
+            flash(
+                "Expiration date and time are invalid.",
+                "danger",
+            )
+            return render_template("discount_form.html")
+
+        if (
+            starts_at is not None
+            and expires_at is not None
+            and expires_at <= starts_at
+        ):
+            flash(
+                "Expiration must be after the start date and time.",
+                "danger",
+            )
+            return render_template("discount_form.html")
+
+        if max_uses_input:
+            try:
+                max_uses = int(max_uses_input)
+
+                if max_uses <= 0:
+                    raise ValueError
+            except ValueError:
+                flash(
+                    "Maximum uses must be a positive whole number.",
+                    "danger",
+                )
+                return render_template("discount_form.html")
+        else:
+            max_uses = None
+
+        db = get_db()
+
+        try:
+            db.execute(
+                """
+                INSERT INTO discounts (
+                    code,
+                    description,
+                    discount_type,
+                    discount_value,
+                    starts_at,
+                    expires_at,
+                    max_uses,
+                    is_active
+                )
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    code,
+                    description or None,
+                    discount_type,
+                    discount_value,
+                    starts_at.isoformat(sep=" ")
+                    if starts_at
+                    else None,
+                    expires_at.isoformat(sep=" ")
+                    if expires_at
+                    else None,
+                    max_uses,
+                    is_active,
+                ),
+            )
+            db.commit()
+        except sqlite3.IntegrityError:
+            flash(
+                "A discount with that code already exists.",
+                "danger",
+            )
+            return render_template("discount_form.html")
+
+        flash(
+            f"Discount code {code} created successfully.",
+            "success",
+        )
+        return redirect(url_for("main.discounts"))
+
+    return render_template("discount_form.html")
