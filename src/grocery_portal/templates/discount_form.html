@@ -1,0 +1,224 @@
+{% extends "base.html" %}
+
+{% block title %}
+Create Discount - Online Grocery Internal Portal
+{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1 class="h2 text-dark fw-bold mb-1">
+            Create Discount Code
+        </h1>
+
+        <p class="text-muted mb-0">
+            Create a percentage or fixed-amount promotion.
+        </p>
+    </div>
+</div>
+
+<div class="card border-0 shadow-sm">
+    <div class="card-body p-4">
+        <form method="POST">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label for="code" class="form-label">
+                        Discount Code
+                    </label>
+
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="code"
+                        name="code"
+                        value="{{ request.form.get('code', '') }}"
+                        placeholder="WELCOME10"
+                        maxlength="50"
+                        required
+                    >
+
+                    <div class="form-text">
+                        Codes are saved in uppercase and cannot contain spaces.
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <label
+                        for="discount_type"
+                        class="form-label"
+                    >
+                        Discount Type
+                    </label>
+
+                    <select
+                        class="form-select"
+                        id="discount_type"
+                        name="discount_type"
+                        required
+                    >
+                        <option value="">
+                            Select a discount type
+                        </option>
+
+                        <option
+                            value="percentage"
+                            {% if request.form.get('discount_type') == 'percentage' %}
+                                selected
+                            {% endif %}
+                        >
+                            Percentage
+                        </option>
+
+                        <option
+                            value="fixed"
+                            {% if request.form.get('discount_type') == 'fixed' %}
+                                selected
+                            {% endif %}
+                        >
+                            Fixed Amount
+                        </option>
+                    </select>
+                </div>
+
+                <div class="col-md-6">
+                    <label
+                        for="discount_value"
+                        class="form-label"
+                    >
+                        Discount Value
+                    </label>
+
+                    <input
+                        type="number"
+                        class="form-control"
+                        id="discount_value"
+                        name="discount_value"
+                        value="{{ request.form.get('discount_value', '') }}"
+                        min="0.01"
+                        step="0.01"
+                        required
+                    >
+
+                    <div class="form-text">
+                        Enter 10 for 10% or 5 for $5 off.
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <label
+                        for="max_uses"
+                        class="form-label"
+                    >
+                        Maximum Uses
+                    </label>
+
+                    <input
+                        type="number"
+                        class="form-control"
+                        id="max_uses"
+                        name="max_uses"
+                        value="{{ request.form.get('max_uses', '') }}"
+                        min="1"
+                        step="1"
+                    >
+
+                    <div class="form-text">
+                        Leave blank for unlimited uses.
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="starts_at" class="form-label">
+                        Starts At
+                    </label>
+
+                    <input
+                        type="datetime-local"
+                        class="form-control"
+                        id="starts_at"
+                        name="starts_at"
+                        value="{{ request.form.get('starts_at', '') }}"
+                    >
+
+                    <div class="form-text">
+                        Leave blank if it can start immediately.
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="expires_at" class="form-label">
+                        Expires At
+                    </label>
+
+                    <input
+                        type="datetime-local"
+                        class="form-control"
+                        id="expires_at"
+                        name="expires_at"
+                        value="{{ request.form.get('expires_at', '') }}"
+                    >
+
+                    <div class="form-text">
+                        Leave blank if it does not expire.
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <label for="description" class="form-label">
+                        Description
+                    </label>
+
+                    <textarea
+                        class="form-control"
+                        id="description"
+                        name="description"
+                        rows="3"
+                        placeholder="Describe the promotion."
+                    >{{ request.form.get('description', '') }}</textarea>
+                </div>
+
+                <div class="col-12">
+                    <div class="form-check">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="is_active"
+                            name="is_active"
+                            {% if request.method == 'GET' or request.form.get('is_active') %}
+                                checked
+                            {% endif %}
+                        >
+
+                        <label
+                            class="form-check-label"
+                            for="is_active"
+                        >
+                            Active
+                        </label>
+                    </div>
+
+                    <div class="form-text">
+                        Inactive discount codes cannot be used.
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-4 d-flex gap-2">
+                <button
+                    type="submit"
+                    class="btn btn-success"
+                >
+                    Create Discount
+                </button>
+
+                <a
+                    href="{{ url_for('main.discounts') }}"
+                    class="btn btn-secondary"
+                >
+                    Cancel
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
