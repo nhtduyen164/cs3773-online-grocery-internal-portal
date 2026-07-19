@@ -53,10 +53,10 @@
 <form
     method="GET"
     action="{{ url_for('main.products') }}"
-    class="row g-2 mb-4 align-items-center"
+    class="row g-3 mb-5 align-items-end"
 >
-    <div class="col-md-6 col-lg-5">
-        <label for="search" class="visually-hidden">
+    <div class="col-md-5">
+        <label for="search" class="form-label fw-semibold">
             Search products
         </label>
 
@@ -70,19 +70,47 @@
         >
     </div>
 
+    <div class="col-md-3">
+        <label for="sort" class="form-label fw-semibold">
+            Sort by
+        </label>
+
+        <select
+            class="form-select"
+            id="sort"
+            name="sort"
+        >
+            <option value="name" {% if sort == "name" %}selected{% endif %}>
+                Name
+            </option>
+
+            <option value="price_asc" {% if sort == "price_asc" %}selected{% endif %}>
+                Price: Low to High
+            </option>
+
+            <option value="price_desc" {% if sort == "price_desc" %}selected{% endif %}>
+                Price: High to Low
+            </option>
+
+            <option value="availability" {% if sort == "availability" %}selected{% endif %}>
+                Availability
+            </option>
+        </select>
+    </div>
+
     <div class="col-auto">
         <button type="submit" class="btn btn-success">
-            Search
+            Apply
         </button>
     </div>
 
-    {% if search %}
+    {% if search or sort != "name" %}
         <div class="col-auto">
             <a
                 href="{{ url_for('main.products') }}"
                 class="btn btn-outline-secondary"
             >
-                Clear
+                Reset
             </a>
         </div>
     {% endif %}

@@ -66,6 +66,17 @@ def products():
     db = get_db()
 
     search = request.args.get("search", "").strip()
+    sort = request.args.get("sort", "name")
+
+    sort_options = {
+        "name": "name ASC",
+        "price_asc": "price ASC",
+        "price_desc": "price DESC",
+        "availability": "stock_quantity DESC",
+    }
+
+    if sort not in sort_options:
+        sort = "name"
 
     query = """
         SELECT id,
@@ -89,7 +100,7 @@ def products():
         search_pattern = f"%{search}%"
         parameters.extend([search_pattern, search_pattern])
 
-    query += " ORDER BY name"
+    query += f" ORDER BY {sort_options[sort]}"
 
     products = db.execute(query, parameters).fetchall()
 
@@ -106,6 +117,7 @@ def products():
         total_skus=total_skus,
         low_stock_count=low_stock_count,
         search=search,
+        sort=sort,
     )
 
 
