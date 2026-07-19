@@ -17,13 +17,13 @@ Since the final project deadline is July 30, the team will use a compressed thre
 | B001 | Set up Flask project structure                                                  | High     | Cameron         | Done  | Sprint 1 |
 | B002 | Create `requirements.txt` with required Python packages                         | High     | Cameron         | Done  | Sprint 1 |
 | B003 | Create basic SQLite database connection/setup script                            | High     | Cameron         | Done  | Sprint 1 |
-| B004 | Create database tables for users, products, discounts, orders, and order items  | High     | Esteban         | In Progress  | Sprint 1 |
-| B005 | Add seed data for internal users, products, and customer orders                 | High     | Esteban         | In Progress  | Sprint 1 |
-| B006 | Create shared Bootstrap layout/base template                                    | High     | Esteban         | In Progress  | Sprint 1 |
+| B004 | Create database tables for users, products, discounts, orders, and order items  | High     | Esteban         | Done  | Sprint 1 |
+| B005 | Add seed data for internal users, products, and customer orders                 | High     | Esteban         | Done  | Sprint 1 |
+| B006 | Create shared Bootstrap layout/base template                                    | High     | Esteban         | Done  | Sprint 1 |
 | B007 | Create login page                                                               | High     | Myar            | Done  | Sprint 1 |
 | B008 | Add login/logout session handling                                               | High     | Myar            | Done  | Sprint 1 |
 | B009 | Create dashboard page after successful login                                    | Medium   | Myar            | Done  | Sprint 1 |
-| B010 | Create product catalog page                                                     | High     | Esteban         | In Progress  | Sprint 1 |
+| B010 | Create product catalog page                                                     | High     | Esteban         | Done  | Sprint 1 |
 | B011 | Add product creation form                                                       | High     | Myar            | Done  | Sprint 2 |
 | B012 | Add product edit/update form                                                    | High     | Myar            | Done  | Sprint 2 |
 | B013 | Store and display product name, description, image path, price, and quantity    | High     | Cameron         | Done  | Sprint 2 |
@@ -31,7 +31,7 @@ Since the final project deadline is July 30, the team will use a compressed thre
 | B015 | Add search by product name or description                                       | High     | Cameron         | Done  | Sprint 2 |
 | B016 | Add product sorting by price                                                    | Medium   | Cameron         | Done  | Sprint 2 |
 | B017 | Add product sorting by availability                                             | Medium   | Cameron         | Done  | Sprint 2 |
-| B041 | Replace temporary hardcoded login with database-backed user authentication      | High     | TBD         | To Do  | Sprint 2 |
+| B041 | Replace temporary hardcoded login with database-backed user authentication      | High     | Cameron         | To Do  | Sprint 2 |
 | B018 | Add discount code creation                                                      | Medium   | Cameron         | Done  | Sprint 2 |
 | B019 | Add sale item support for products                                              | Medium   | Cameron         | Done  | Sprint 2 |
 | B020 | Create orders list page showing currently placed orders                         | High     | TBD         | To Do  | Sprint 2 |
