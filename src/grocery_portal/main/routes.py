@@ -73,8 +73,18 @@ def products():
 
     sort_options = {
         "name": "name ASC",
-        "price_asc": "price ASC",
-        "price_desc": "price DESC",
+        "price_asc": """
+            CASE
+                WHEN is_on_sale = 1 THEN sale_price
+                ELSE price
+            END ASC
+        """,
+        "price_desc": """
+            CASE
+                WHEN is_on_sale = 1 THEN sale_price
+                ELSE price
+            END DESC
+        """,
         "availability": "stock_quantity DESC",
     }
 
@@ -88,6 +98,8 @@ def products():
                image_path,
                price,
                stock_quantity,
+               is_on_sale,
+               sale_price,
                created_at
         FROM products
     """
@@ -114,11 +126,17 @@ def products():
         if 0 < product["stock_quantity"] <= 50
     )
 
+    sale_item_count = sum(
+        1 for product in products
+        if product["is_on_sale"]
+    )
+
     return render_template(
         "products.html",
         products=products,
         total_skus=total_skus,
         low_stock_count=low_stock_count,
+        sale_item_count=sale_item_count,
         search=search,
         sort=sort,
     )
@@ -136,51 +154,156 @@ def create_product():
             request.form.get("image_path", "").strip()
             or "images/products/placeholder.png"
         )
-        price = request.form.get("price", "").strip()
-        stock_quantity = request.form.get("stock_quantity", "").strip()
+        price_input = request.form.get("price", "").strip()
+        stock_quantity_input = request.form.get(
+            "stock_quantity",
+            "",
+        ).strip()
+        is_on_sale = 1 if request.form.get("is_on_sale") else 0
+        sale_price_input = request.form.get(
+            "sale_price",
+            "",
+        ).strip()
 
         if not name:
             flash("Product name is required.", "danger")
-            return render_template("product_form.html", product=None, form_type="Create")
+            return render_template(
+                "product_form.html",
+                product=None,
+                form_type="Create",
+            )
 
         try:
-            price = float(price)
+            price = float(price_input)
+
             if price < 0:
                 raise ValueError
         except ValueError:
-            flash("Price must be a valid non-negative number.", "danger")
-            return render_template("product_form.html", product=None, form_type="Create")
+            flash(
+                "Price must be a valid non-negative number.",
+                "danger",
+            )
+            return render_template(
+                "product_form.html",
+                product=None,
+                form_type="Create",
+            )
 
         try:
-            stock_quantity = int(stock_quantity)
+            stock_quantity = int(stock_quantity_input)
+
             if stock_quantity < 0:
                 raise ValueError
         except ValueError:
-            flash("Quantity must be a valid whole number.", "danger")
-            return render_template("product_form.html", product=None, form_type="Create")
+            flash(
+                "Quantity must be a valid whole number.",
+                "danger",
+            )
+            return render_template(
+                "product_form.html",
+                product=None,
+                form_type="Create",
+            )
+
+        if is_on_sale:
+            if not sale_price_input:
+                flash(
+                    "Sale price is required when a product is on sale.",
+                    "danger",
+                )
+                return render_template(
+                    "product_form.html",
+                    product=None,
+                    form_type="Create",
+                )
+
+            try:
+                sale_price = float(sale_price_input)
+
+                if sale_price < 0:
+                    raise ValueError
+            except ValueError:
+                flash(
+                    "Sale price must be a valid non-negative number.",
+                    "danger",
+                )
+                return render_template(
+                    "product_form.html",
+                    product=None,
+                    form_type="Create",
+                )
+
+            if sale_price >= price:
+                flash(
+                    "Sale price must be less than the regular price.",
+                    "danger",
+                )
+                return render_template(
+                    "product_form.html",
+                    product=None,
+                    form_type="Create",
+                )
+        else:
+            sale_price = None
 
         db.execute(
             """
-            INSERT INTO products (name, description, image_path, price, stock_quantity)
-            VALUES (?, ?, ?, ?, ?)
+            INSERT INTO products (
+                name,
+                description,
+                image_path,
+                price,
+                stock_quantity,
+                is_on_sale,
+                sale_price
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?)
             """,
-            (name, description, image_path, price, stock_quantity),
+            (
+                name,
+                description or None,
+                image_path,
+                price,
+                stock_quantity,
+                is_on_sale,
+                sale_price,
+            ),
         )
         db.commit()
 
         flash("Product created successfully.", "success")
         return redirect(url_for("main.products"))
 
-    return render_template("product_form.html", product=None, form_type="Create")
+    return render_template(
+        "product_form.html",
+        product=None,
+        form_type="Create",
+    )
 
 
-@main_bp.route("/products/<int:product_id>/edit", methods=["GET", "POST"])
+@main_bp.route(
+    "/products/<int:product_id>/edit",
+    methods=["GET", "POST"],
+)
 @login_required
 def edit_product(product_id):
     db = get_db()
 
     product = db.execute(
-        "SELECT * FROM products WHERE id = ?",
+        """
+        SELECT
+            id,
+            name,
+            description,
+            image_path,
+            price,
+            stock_quantity,
+            is_on_sale,
+            sale_price,
+            created_at
+        FROM products
+        WHERE id = ?
+        """,
         (product_id,),
     ).fetchone()
 
@@ -195,43 +318,131 @@ def edit_product(product_id):
             request.form.get("image_path", "").strip()
             or "images/products/placeholder.png"
         )
-        price = request.form.get("price", "").strip()
-        stock_quantity = request.form.get("stock_quantity", "").strip()
+        price_input = request.form.get("price", "").strip()
+        stock_quantity_input = request.form.get(
+            "stock_quantity",
+            "",
+        ).strip()
+        is_on_sale = 1 if request.form.get("is_on_sale") else 0
+        sale_price_input = request.form.get(
+            "sale_price",
+            "",
+        ).strip()
 
         if not name:
             flash("Product name is required.", "danger")
-            return render_template("product_form.html", product=product, form_type="Edit")
+            return render_template(
+                "product_form.html",
+                product=product,
+                form_type="Edit",
+            )
 
         try:
-            price = float(price)
+            price = float(price_input)
+
             if price < 0:
                 raise ValueError
         except ValueError:
-            flash("Price must be a valid non-negative number.", "danger")
-            return render_template("product_form.html", product=product, form_type="Edit")
+            flash(
+                "Price must be a valid non-negative number.",
+                "danger",
+            )
+            return render_template(
+                "product_form.html",
+                product=product,
+                form_type="Edit",
+            )
 
         try:
-            stock_quantity = int(stock_quantity)
+            stock_quantity = int(stock_quantity_input)
+
             if stock_quantity < 0:
                 raise ValueError
         except ValueError:
-            flash("Quantity must be a valid whole number.", "danger")
-            return render_template("product_form.html", product=product, form_type="Edit")
+            flash(
+                "Quantity must be a valid whole number.",
+                "danger",
+            )
+            return render_template(
+                "product_form.html",
+                product=product,
+                form_type="Edit",
+            )
+
+        if is_on_sale:
+            if not sale_price_input:
+                flash(
+                    "Sale price is required when a product is on sale.",
+                    "danger",
+                )
+                return render_template(
+                    "product_form.html",
+                    product=product,
+                    form_type="Edit",
+                )
+
+            try:
+                sale_price = float(sale_price_input)
+
+                if sale_price < 0:
+                    raise ValueError
+            except ValueError:
+                flash(
+                    "Sale price must be a valid non-negative number.",
+                    "danger",
+                )
+                return render_template(
+                    "product_form.html",
+                    product=product,
+                    form_type="Edit",
+                )
+
+            if sale_price >= price:
+                flash(
+                    "Sale price must be less than the regular price.",
+                    "danger",
+                )
+                return render_template(
+                    "product_form.html",
+                    product=product,
+                    form_type="Edit",
+                )
+        else:
+            sale_price = None
 
         db.execute(
             """
             UPDATE products
-            SET name = ?, description = ?, image_path = ?, price = ?, stock_quantity = ?
+            SET name = ?,
+                description = ?,
+                image_path = ?,
+                price = ?,
+                stock_quantity = ?,
+                is_on_sale = ?,
+                sale_price = ?
             WHERE id = ?
             """,
-            (name, description, image_path, price, stock_quantity, product_id),
+            (
+                name,
+                description or None,
+                image_path,
+                price,
+                stock_quantity,
+                is_on_sale,
+                sale_price,
+                product_id,
+            ),
         )
         db.commit()
 
         flash("Product updated successfully.", "success")
         return redirect(url_for("main.products"))
 
-    return render_template("product_form.html", product=product, form_type="Edit")
+    return render_template(
+        "product_form.html",
+        product=product,
+        form_type="Edit",
+    )
 
 
 @main_bp.route("/discounts")

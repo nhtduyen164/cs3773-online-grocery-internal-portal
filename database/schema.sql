@@ -20,10 +20,18 @@ CREATE TABLE products (
     id             INTEGER PRIMARY KEY AUTOINCREMENT,
     name           TEXT NOT NULL,
     description    TEXT,
-    image_path TEXT,
+    image_path     TEXT,
     price          NUMERIC NOT NULL CHECK (price >= 0),
     stock_quantity INTEGER NOT NULL DEFAULT 0 CHECK (stock_quantity >= 0),
-    created_at     TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+    is_on_sale     INTEGER NOT NULL DEFAULT 0 CHECK (is_on_sale IN (0, 1)),
+    sale_price     NUMERIC CHECK (sale_price IS NULL OR sale_price >= 0),
+    created_at     TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CHECK (
+        (is_on_sale = 0 AND sale_price IS NULL)
+        OR
+        (is_on_sale = 1 AND sale_price IS NOT NULL AND sale_price < price)
+    )
 );
 
 CREATE TABLE discounts (

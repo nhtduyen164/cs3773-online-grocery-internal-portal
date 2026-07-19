@@ -17,16 +17,90 @@ INSERT INTO products (
     description,
     image_path,
     price,
-    stock_quantity
+    stock_quantity,
+    is_on_sale,
+    sale_price
 ) VALUES
-    (1, 'Organic Bananas',         'Sold per pound, organic',            'images/products/placeholder.png', 0.59, 150),
-    (2, 'Whole Milk (1 Gallon)',   'Vitamin D whole milk',               'images/products/placeholder.png', 3.49, 80),
-    (3, 'Sourdough Bread',         'Fresh baked in-store daily',         'images/products/placeholder.png', 4.99, 45),
-    (4, 'Free-Range Eggs (Dozen)', 'Large brown eggs',                   'images/products/placeholder.png', 5.29, 60),
-    (5, 'Cheddar Cheese Block',    'Sharp cheddar, 8oz block',           'images/products/placeholder.png', 6.79, 40),
-    (6, 'Roma Tomatoes',           'Sold per pound',                     'images/products/placeholder.png', 1.99, 120),
-    (7, 'Chicken Breast',          'Boneless, skinless, per pound',      'images/products/placeholder.png', 4.49, 70),
-    (8, 'Ground Coffee (12oz)',    'Medium roast, whole bean or ground', 'images/products/placeholder.png', 8.99, 55);
+    (
+        1,
+        'Organic Bananas',
+        'Sold per pound, organic',
+        'images/products/placeholder.png',
+        0.59,
+        150,
+        0,
+        NULL
+    ),
+    (
+        2,
+        'Whole Milk (1 Gallon)',
+        'Vitamin D whole milk',
+        'images/products/placeholder.png',
+        3.49,
+        80,
+        1,
+        2.99
+    ),
+    (
+        3,
+        'Sourdough Bread',
+        'Fresh baked in-store daily',
+        'images/products/placeholder.png',
+        4.99,
+        45,
+        0,
+        NULL
+    ),
+    (
+        4,
+        'Free-Range Eggs (Dozen)',
+        'Large brown eggs',
+        'images/products/placeholder.png',
+        5.29,
+        60,
+        0,
+        NULL
+    ),
+    (
+        5,
+        'Cheddar Cheese Block',
+        'Sharp cheddar, 8oz block',
+        'images/products/placeholder.png',
+        6.79,
+        40,
+        1,
+        5.49
+    ),
+    (
+        6,
+        'Roma Tomatoes',
+        'Sold per pound',
+        'images/products/placeholder.png',
+        1.99,
+        120,
+        0,
+        NULL
+    ),
+    (
+        7,
+        'Chicken Breast',
+        'Boneless, skinless, per pound',
+        'images/products/placeholder.png',
+        4.49,
+        70,
+        0,
+        NULL
+    ),
+    (
+        8,
+        'Ground Coffee (12oz)',
+        'Medium roast, whole bean or ground',
+        'images/products/placeholder.png',
+        8.99,
+        55,
+        0,
+        NULL
+    );
 
 -- ---------------------------------------------------------------------------
 -- Discounts
