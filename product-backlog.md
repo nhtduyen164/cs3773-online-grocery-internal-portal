@@ -34,11 +34,11 @@ Since the final project deadline is July 30, the team will use a compressed thre
 | B041 | Replace temporary hardcoded login with database-backed user authentication      | High     | Cameron         | To Do  | Sprint 2 |
 | B018 | Add discount code creation                                                      | Medium   | Cameron         | Done  | Sprint 2 |
 | B019 | Add sale item support for products                                              | Medium   | Cameron         | Done  | Sprint 2 |
-| B020 | Create orders list page showing currently placed orders                         | High     | TBD         | To Do  | Sprint 2 |
-| B021 | Create order detail page showing customer, items, quantities, prices, and total | High     | TBD         | To Do  | Sprint 2 |
-| B022 | Add order sorting by order time                                                 | Medium   | TBD         | To Do  | Sprint 2 |
-| B023 | Add order sorting by customer                                                   | Medium   | TBD         | To Do  | Sprint 2 |
-| B024 | Add order sorting by total dollar amount                                        | Medium   | TBD         | To Do  | Sprint 2 |
+| B020 | Create orders list page showing currently placed orders                         | High     | Esteban         | To Do  | Sprint 2 |
+| B021 | Create order detail page showing customer, items, quantities, prices, and total | High     | Esteban          | To Do  | Sprint 2 |
+| B022 | Add order sorting by order time                                                 | Medium   | Esteban         | To Do  | Sprint 2 |
+| B023 | Add order sorting by customer                                                   | Medium   | Esteban          | To Do  | Sprint 2 |
+| B024 | Add order sorting by total dollar amount                                        | Medium   | Esteban          | To Do  | Sprint 2 |
 | B025 | Add order execution logic                                                       | High     | TBD         | To Do  | Sprint 2 |
 | B026 | Reduce product quantity when an order is executed                               | High     | TBD         | To Do  | Sprint 2 |
 | B027 | Change order status when an order is executed                                   | High     | TBD         | To Do  | Sprint 2 |
