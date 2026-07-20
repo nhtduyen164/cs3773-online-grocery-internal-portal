@@ -5,23 +5,18 @@ from grocery_portal.db import get_db
 
 import sqlite3
 from datetime import datetime
+from werkzeug.security import check_password_hash
 
 main_bp = Blueprint("main", __name__)
-
-# Temporary users for sprint 1 login testing
-# This can be replaced with users from the database later
-USERS = {
-    "employee1": "password123",
-    "manager1": "admin123"
-}
 
 
 def login_required(route_function):
     @wraps(route_function)
     def wrapper(*args, **kwargs):
-        if "username" not in session:
+        if "user_id" not in session:
             flash("Please log in to access this page.", "warning")
             return redirect(url_for("main.login"))
+
         return route_function(*args, **kwargs)
 
     return wrapper
@@ -29,19 +24,46 @@ def login_required(route_function):
 
 @main_bp.route("/")
 def index():
-    if "username" in session:
+    if "user_id" in session:
         return redirect(url_for("main.dashboard"))
+
     return redirect(url_for("main.login"))
 
 
 @main_bp.route("/login", methods=["GET", "POST"])
 def login():
+    if "user_id" in session:
+        return redirect(url_for("main.dashboard"))
+
     if request.method == "POST":
         username = request.form.get("username", "").strip()
-        password = request.form.get("password", "").strip()
+        password = request.form.get("password", "")
 
-        if username in USERS and USERS[username] == password:
-            session["username"] = username
+        db = get_db()
+
+        user = db.execute(
+            """
+            SELECT
+                id,
+                username,
+                email,
+                password_hash,
+                role
+            FROM users
+            WHERE username = ?
+            """,
+            (username,),
+        ).fetchone()
+
+        if user is not None and check_password_hash(
+            user["password_hash"],
+            password,
+        ):
+            session.clear()
+            session["user_id"] = user["id"]
+            session["username"] = user["username"]
+            session["role"] = user["role"]
+
             flash("Login successful.", "success")
             return redirect(url_for("main.dashboard"))
 

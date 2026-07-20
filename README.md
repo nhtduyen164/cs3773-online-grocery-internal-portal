@@ -2,7 +2,7 @@
 ## Project Option 2: Online Grocery Internal Portal
 ### Project Overview
 
-This project is creating a backend system design for an internal staff portal of an online grocery store. The system will allow store staff to manage products, stock levels, pricing, discounts, sale items and customer orders.
+This project is creating a backend system design for an internal staff portal of an online grocery store. The system allows internal staff to authenticate and manage products, inventory levels, pricing, discounts, sale items, and customer orders.
 
 The portal is intended for internal users, not customers. Staff members will be able to log in, manage product infomation, track inventory, search and sort products, browse and execute orders.
 
@@ -15,9 +15,13 @@ The portal is intended for internal users, not customers. Staff members will be 
   - Github (for version control)
 
 ### Main Features
-  - Login/Users and Product Catalog
-  - Inventory, Discounts, Search, Orders
-  - ...
+- Database-backed staff authentication
+- Product catalog management
+- Inventory tracking
+- Product search and sorting
+- Discount management
+- Sale item management
+- Customer order management
 
 ### Milestone 1 Deliverables: Testable User Stories **(Due June 30)**
   - [x] Testable User Stories
@@ -84,7 +88,7 @@ flask --app src/app.py init-db
 
 This creates the database tables using `database/schema.sql` and loads the sample data from `database/seed_data.sql`.
 
-Running this command resets the existing database data.
+> **Note:** Running this command recreates the SQLite database and reloads the sample data, replacing any existing data.
 
 #### 6. Start the application
 
@@ -100,18 +104,14 @@ Open the following address in a browser:
 http://127.0.0.1:5000
 ```
 
-#### Test Login Accounts
+## Demo User Accounts
 
-Employee account:
+| Role | Username | Password |
+|------|----------|----------|
+| Cashier | employee1 | password123 |
+| Manager | manager1 | admin123 |
+| Admin | alice_johnson | ADMIN123! |
+| Manager | bob_martinez | MANAGER123! |
+| Cashier | carla_nguyen | CASHIER123! |
 
-```text
-Username: employee1
-Password: password123
-```
-
-Manager account:
-
-```text
-Username: manager1
-Password: admin123
-```
+These accounts are automatically created when the database is initialized using the sample seed data.

@@ -3,10 +3,48 @@
 -- ---------------------------------------------------------------------------
 -- Users
 -- ---------------------------------------------------------------------------
-INSERT INTO users (id, username, email, password_hash, role) VALUES
-    (1, 'alice_johnson', 'alice@example.com', 'ADMIN123!', 'admin'),
-    (2, 'bob_martinez',  'bob@example.com',   'MANAGER123!', 'manager'),
-    (3, 'carla_nguyen',  'carla@example.com', 'CASHIER123!', 'cashier');
+INSERT INTO users (
+    id,
+    username,
+    email,
+    password_hash,
+    role
+) VALUES
+    (
+        1,
+        'alice_johnson',
+        'alice@example.com',
+        'pbkdf2:sha256:600000$aliceSalt$06c53c4d07e7d48242ffa26474e1f3dcfe41324ff4859b1f14e6faf2dbbd82a9',
+        'admin'
+    ),
+    (
+        2,
+        'bob_martinez',
+        'bob@example.com',
+        'pbkdf2:sha256:600000$bobSalt$05bf725c65eaeb327022c1da66b2fb773320c646c32bf60c4a26ccfb879b32a1',
+        'manager'
+    ),
+    (
+        3,
+        'carla_nguyen',
+        'carla@example.com',
+        'pbkdf2:sha256:600000$carlaSalt$630fd3b8e8751c954c6ec9681febd34a41bee4914208782bc9f78e4c65549c48',
+        'cashier'
+    ),
+    (
+        4,
+        'employee1',
+        'employee1@example.com',
+        'pbkdf2:sha256:600000$employeeSalt$3ec8a63c1862d12eae8747d3307a86800d578987d2eedb73f1ee1e4cc5f48eec',
+        'cashier'
+    ),
+    (
+        5,
+        'manager1',
+        'manager1@example.com',
+        'pbkdf2:sha256:600000$managerSalt$a01fa1c92eee939ee6e1f6ce920eea29ced344421be58e7ee3a5da5a686d01fc',
+        'manager'
+    );
 
 -- ---------------------------------------------------------------------------
 -- Products (grocery store)
