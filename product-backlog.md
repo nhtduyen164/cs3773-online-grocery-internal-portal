@@ -31,7 +31,7 @@ Since the final project deadline is July 30, the team will use a compressed thre
 | B015 | Add search by product name or description                                       | High     | Cameron         | Done  | Sprint 2 |
 | B016 | Add product sorting by price                                                    | Medium   | Cameron         | Done  | Sprint 2 |
 | B017 | Add product sorting by availability                                             | Medium   | Cameron         | Done  | Sprint 2 |
-| B041 | Replace temporary hardcoded login with database-backed user authentication      | High     | Cameron         | To Do  | Sprint 2 |
+| B041 | Replace temporary hardcoded login with database-backed user authentication      | High     | Cameron         | Done  | Sprint 2 |
 | B018 | Add discount code creation                                                      | Medium   | Cameron         | Done  | Sprint 2 |
 | B019 | Add sale item support for products                                              | Medium   | Cameron         | Done  | Sprint 2 |
 | B020 | Create orders list page showing currently placed orders                         | High     | Esteban         | To Do  | Sprint 2 |
@@ -47,7 +47,7 @@ Since the final project deadline is July 30, the team will use a compressed thre
 | B030 | Add unit tests for product search/sort logic                                    | Medium   | TBD         | To Do  | Sprint 3 |
 | B031 | Add unit tests for order execution and inventory reduction                      | High     | TBD         | To Do  | Sprint 3 |
 | B032 | Add unit tests for login or authentication logic                                | Medium   | TBD         | To Do  | Sprint 3 |
-| B033 | Clean up UI styling and navigation                                              | Medium   | TBD         | To Do  | Sprint 3 |
+| B033 | Clean up UI styling and navigation                                              | Medium   | Cameron         | To Do  | Sprint 3 |
 | B034 | Update README with setup and run instructions                                   | High     | TBD         | To Do  | Sprint 3 |
 | B035 | Update user stories if implementation changed                                   | Medium   | TBD         | To Do  | Sprint 3 |
 | B036 | Update class diagram if implementation changed                                  | Medium   | TBD         | To Do  | Sprint 3 |
