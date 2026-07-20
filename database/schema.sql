@@ -51,8 +51,8 @@ CREATE TABLE discounts (
 CREATE TABLE orders (
     id              INTEGER PRIMARY KEY AUTOINCREMENT,
     discount_id     INTEGER,
-    status          TEXT NOT NULL DEFAULT 'pending'
-        CHECK (status IN ('pending', 'completed', 'cancelled', 'refunded')),
+    status          TEXT NOT NULL DEFAULT 'placed'
+        CHECK (status IN ('placed', 'completed', 'cancelled', 'refunded')),
     subtotal        NUMERIC NOT NULL DEFAULT 0 CHECK (subtotal >= 0),
     discount_amount NUMERIC NOT NULL DEFAULT 0 CHECK (discount_amount >= 0),
     total_amount    NUMERIC NOT NULL DEFAULT 0 CHECK (total_amount >= 0),
@@ -71,5 +71,6 @@ CREATE TABLE order_items (
 );
 
 CREATE INDEX idx_orders_discount_id ON orders (discount_id);
+CREATE INDEX idx_orders_status ON orders (status);
 CREATE INDEX idx_order_items_order_id ON order_items (order_id);
 CREATE INDEX idx_order_items_product_id ON order_items (product_id);

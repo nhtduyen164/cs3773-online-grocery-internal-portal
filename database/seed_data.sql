@@ -154,18 +154,18 @@ INSERT INTO discounts (id, code, description, discount_type, discount_value, sta
 
 -- Order 1
 --   Subtotal: 3x0.59 + 2x3.49 + 1x4.99 = 13.74 ; 10% off = 1.37 ; total = 12.37
-INSERT INTO orders (id, discount_id, status, subtotal, discount_amount, total_amount) VALUES
-    (1, 1, 'completed', 13.74, 1.37, 12.37);
+INSERT INTO orders (id, discount_id, status, subtotal, discount_amount, total_amount, created_at, updated_at) VALUES
+    (1, 1, 'completed', 13.74, 1.37, 12.37, '2026-07-18 09:15:00', '2026-07-18 09:20:00');
 
 -- Order 2
 --   Subtotal: 1x5.29 + 2x6.79 + 3x4.49 = 32.34 ; total = 32.34
-INSERT INTO orders (id, discount_id, status, subtotal, discount_amount, total_amount) VALUES
-    (2, NULL, 'pending', 32.34, 0.00, 32.34);
+INSERT INTO orders (id, discount_id, status, subtotal, discount_amount, total_amount, created_at, updated_at) VALUES
+    (2, NULL, 'placed', 32.34, 0.00, 32.34, '2026-07-19 11:00:00', '2026-07-19 11:00:00');
 
 -- Order 3
 --   Subtotal: 4x1.99 + 1x8.99 + 1x3.49 = 20.44 ; $5 off = 5.00 ; total = 15.44
-INSERT INTO orders (id, discount_id, status, subtotal, discount_amount, total_amount) VALUES
-    (3, 2, 'pending', 20.44, 5.00, 15.44);
+INSERT INTO orders (id, discount_id, status, subtotal, discount_amount, total_amount, created_at, updated_at) VALUES
+    (3, 2, 'placed', 20.44, 5.00, 15.44, '2026-07-19 15:30:00', '2026-07-19 15:30:00');
 
 -- ---------------------------------------------------------------------------
 -- Order Items
