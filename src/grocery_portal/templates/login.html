@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block title %}
+Staff Login - Online Grocery Internal Portal
+{% endblock %}
+
 {% block content %}
 
 <div class="row justify-content-center">
@@ -20,6 +24,8 @@
                             class="form-control"
                             id="username"
                             name="username"
+                            value="{{ request.form.get('username', '') }}"
+                            autocomplete="username"
                             required
                         >
                     </div>
@@ -31,6 +37,7 @@
                             class="form-control"
                             id="password"
                             name="password"
+                            autocomplete="current-password"
                             required
                         >
                     </div>
@@ -43,9 +50,19 @@
             </div>
         </div>
 
-        <p class="text-muted text-center mt-3">
-            Test account: employee1 / password123
-        </p>
+        <div class="text-muted text-center mt-3 small">
+            <p class="mb-1">
+                Cashier account:
+                <strong>employee1</strong> /
+                <strong>password123</strong>
+            </p>
+
+            <p class="mb-0">
+                Manager account:
+                <strong>manager1</strong> /
+                <strong>admin123</strong>
+            </p>
+        </div>
 
     </div>
 </div>

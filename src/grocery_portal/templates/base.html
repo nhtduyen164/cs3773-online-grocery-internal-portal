@@ -28,7 +28,7 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarNav">
-            {% if session.get("username") %}
+            {% if session.get("user_id") %}
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
                        <a
@@ -70,6 +70,10 @@
                         <strong class="text-white">
                             {{ session["username"] }}
                         </strong>
+
+                        <span class="badge bg-light text-success ms-1">
+                            {{ session["role"]|title }}
+                        </span>
                     </span>
 
                     <a
