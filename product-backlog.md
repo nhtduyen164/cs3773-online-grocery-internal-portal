@@ -47,7 +47,7 @@ Since the final project deadline is July 30, the team will use a compressed thre
 | B030 | Add unit tests for product search/sort logic                                    | Medium   | TBD         | To Do  | Sprint 3 |
 | B031 | Add unit tests for order execution and inventory reduction                      | High     | TBD         | To Do  | Sprint 3 |
 | B032 | Add unit tests for login or authentication logic                                | Medium   | TBD         | To Do  | Sprint 3 |
-| B033 | Clean up UI styling and navigation                                              | Medium   | Cameron         | To Do  | Sprint 3 |
+| B033 | Clean up UI styling and navigation                                              | Medium   | Cameron         | Done  | Sprint 3 |
 | B034 | Update README with setup and run instructions                                   | High     | TBD         | To Do  | Sprint 3 |
 | B035 | Update user stories if implementation changed                                   | Medium   | TBD         | To Do  | Sprint 3 |
 | B036 | Update class diagram if implementation changed                                  | Medium   | TBD         | To Do  | Sprint 3 |
