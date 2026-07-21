@@ -661,10 +661,12 @@ def create_discount():
 SORT_COLUMNS = {
     "id": "id",
     "time": "created_at",
+    "customer": "customer_name COLLATE NOCASE",
     "amount": "total_amount",
 }
+
 DEFAULT_SORT = "time"
-DEFAULT_DIRECTION = "asc"
+DEFAULT_DIRECTION = "desc"
 
 
 def _get_sort_args():
@@ -691,14 +693,25 @@ def _sort_links(sort, direction):
 
 def _fetch_orders(currently_placed, sort, direction):
     db = get_db()
+
     column = SORT_COLUMNS[sort]
-    where_clause = "WHERE status = 'placed'" if currently_placed else "WHERE status != 'placed'"
+    where_clause = (
+        "WHERE status = 'placed'"
+        if currently_placed
+        else "WHERE status != 'placed'"
+    )
 
     query = (
-        f"SELECT id, status, total_amount, created_at "
+        "SELECT "
+        "id, "
+        "customer_name, "
+        "status, "
+        "total_amount, "
+        "created_at "
         f"FROM orders {where_clause} "
         f"ORDER BY {column} {direction.upper()}"
     )
+
     return db.execute(query).fetchall()
 
 
@@ -736,10 +749,21 @@ def order_history():
 
 def _get_order_or_404(order_id):
     db = get_db()
+
     order = db.execute(
-        "SELECT id, status, subtotal, discount_amount,"
-        " total_amount, created_at, updated_at"
-        " FROM orders WHERE id = ?",
+        """
+        SELECT
+            id,
+            customer_name,
+            status,
+            subtotal,
+            discount_amount,
+            total_amount,
+            created_at,
+            updated_at
+        FROM orders
+        WHERE id = ?
+        """,
         (order_id,),
     ).fetchone()
 
@@ -784,6 +808,10 @@ def execute_order(order_id):
         " WHERE oi.order_id = ?",
         (order_id,),
     ).fetchall()
+
+    if not items:
+        flash("This order does not contain any items.", "warning")
+        return redirect(url_for("main.order_detail", order_id=order_id))
 
     shortages = [item for item in items if item["quantity"] > item["stock_quantity"]]
 

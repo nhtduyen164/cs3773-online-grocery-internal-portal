@@ -51,6 +51,7 @@ CREATE TABLE discounts (
 CREATE TABLE orders (
     id              INTEGER PRIMARY KEY AUTOINCREMENT,
     discount_id     INTEGER,
+    customer_name   TEXT NOT NULL,
     status          TEXT NOT NULL DEFAULT 'placed'
         CHECK (status IN ('placed', 'completed', 'cancelled', 'refunded')),
     subtotal        NUMERIC NOT NULL DEFAULT 0 CHECK (subtotal >= 0),
@@ -58,7 +59,10 @@ CREATE TABLE orders (
     total_amount    NUMERIC NOT NULL DEFAULT 0 CHECK (total_amount >= 0),
     created_at      TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at      TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (discount_id) REFERENCES discounts (id) ON DELETE SET NULL
+
+    FOREIGN KEY (discount_id)
+        REFERENCES discounts (id)
+        ON DELETE SET NULL
 );
 
 CREATE TABLE order_items (
@@ -72,5 +76,6 @@ CREATE TABLE order_items (
 
 CREATE INDEX idx_orders_discount_id ON orders (discount_id);
 CREATE INDEX idx_orders_status ON orders (status);
+CREATE INDEX idx_orders_customer_name ON orders (customer_name);
 CREATE INDEX idx_order_items_order_id ON order_items (order_id);
 CREATE INDEX idx_order_items_product_id ON order_items (product_id);

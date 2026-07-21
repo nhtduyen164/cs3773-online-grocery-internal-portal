@@ -32,6 +32,15 @@
         Order Time {% if sort == 'time' %}({{ direction }}){% endif %}
     </a>
     <a
+        class="btn btn-sm {{ 'btn-success' if sort == 'customer' else 'btn-outline-success' }}"
+        href="{{ url_for(request.endpoint, sort='customer', dir=sort_links['customer']) }}"
+    >
+        Customer
+        {% if sort == 'customer' %}
+            ({{ direction }})
+        {% endif %}
+    </a>
+    <a
             class="btn btn-sm {{ 'btn-success' if sort == 'amount' else 'btn-outline-success' }}"
             href="{{ url_for(request.endpoint, sort='amount', dir=sort_links['amount']) }}"
     >
@@ -46,6 +55,7 @@
             <thead>
             <tr>
                 <th>Order #</th>
+                <th>Customer</th>
                 <th>Status</th>
                 <th>Total</th>
                 <th>Placed At</th>
@@ -56,6 +66,7 @@
             {% for order in orders %}
             <tr>
                 <td>#{{ order['id'] }}</td>
+                <td>{{ order['customer_name'] }}</td>
                 <td>
                                 <span class="badge
                                     {% if order['status'] == 'placed' %}bg-warning text-dark
