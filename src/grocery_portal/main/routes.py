@@ -83,13 +83,81 @@ def logout():
 @main_bp.route("/dashboard")
 @login_required
 def dashboard():
-    return render_template("dashboard.html", username=session["username"])
+    db = get_db()
+
+    product_metrics = db.execute("""
+        SELECT
+            COUNT(*) AS total_products,
+            SUM(
+                CASE
+                    WHEN stock_quantity > 0
+                     AND stock_quantity <= 50
+                    THEN 1
+                    ELSE 0
+                END
+            ) AS low_stock_products
+        FROM products
+        """).fetchone()
+
+    discount_metrics = db.execute("""
+        SELECT
+            SUM(
+                CASE
+                    WHEN is_active = 1
+                    THEN 1
+                    ELSE 0
+                END
+            ) AS active_discounts
+        FROM discounts
+        """).fetchone()
+
+    order_metrics = db.execute("""
+        SELECT
+            SUM(
+                CASE
+                    WHEN status = 'placed'
+                    THEN 1
+                    ELSE 0
+                END
+            ) AS placed_orders
+        FROM orders
+        """).fetchone()
+
+    return render_template(
+        "dashboard.html",
+        username=session["username"],
+        total_products=product_metrics["total_products"] or 0,
+        low_stock_products=product_metrics["low_stock_products"] or 0,
+        active_discounts=discount_metrics["active_discounts"] or 0,
+        placed_orders=order_metrics["placed_orders"] or 0,
+    )
 
 
 @main_bp.route("/products")
 @login_required
 def products():
     db = get_db()
+
+    metrics = db.execute("""
+        SELECT
+            COUNT(*) AS total_skus,
+            SUM(
+                CASE
+                    WHEN stock_quantity > 0
+                     AND stock_quantity <= 50
+                    THEN 1
+                    ELSE 0
+                END
+            ) AS low_stock_count,
+            SUM(
+                CASE
+                    WHEN is_on_sale = 1
+                    THEN 1
+                    ELSE 0
+                END
+            ) AS sale_item_count
+        FROM products
+        """).fetchone()
 
     search = request.args.get("search", "").strip()
     sort = request.args.get("sort", "name")
@@ -142,24 +210,13 @@ def products():
 
     products = db.execute(query, parameters).fetchall()
 
-    total_skus = len(products)
-
-    low_stock_count = sum(
-        1 for product in products
-        if 0 < product["stock_quantity"] <= 50
-    )
-
-    sale_item_count = sum(
-        1 for product in products
-        if product["is_on_sale"]
-    )
-
     return render_template(
         "products.html",
         products=products,
-        total_skus=total_skus,
-        low_stock_count=low_stock_count,
-        sale_item_count=sale_item_count,
+        total_skus=metrics["total_skus"] or 0,
+        low_stock_count=metrics["low_stock_count"] or 0,
+        sale_item_count=metrics["sale_item_count"] or 0,
+        matching_product_count=len(products),
         search=search,
         sort=sort,
     )
@@ -473,8 +530,7 @@ def edit_product(product_id):
 def discounts():
     db = get_db()
 
-    discount_rows = db.execute(
-        """
+    discount_rows = db.execute("""
         SELECT
             id,
             code,
@@ -489,17 +545,60 @@ def discounts():
             created_at
         FROM discounts
         ORDER BY created_at DESC, code ASC
-        """
-    ).fetchall()
+        """).fetchall()
+
+    current_time = datetime.now()
+
+    discounts_with_status = []
+
+    for discount in discount_rows:
+        starts_at = (
+            datetime.fromisoformat(discount["starts_at"])
+            if discount["starts_at"]
+            else None
+        )
+
+        expires_at = (
+            datetime.fromisoformat(discount["expires_at"])
+            if discount["expires_at"]
+            else None
+        )
+
+        if not discount["is_active"]:
+            display_status = "Inactive"
+            status_class = "bg-secondary"
+        elif starts_at is not None and starts_at > current_time:
+            display_status = "Scheduled"
+            status_class = "bg-info text-dark"
+        elif expires_at is not None and expires_at <= current_time:
+            display_status = "Expired"
+            status_class = "bg-secondary"
+        elif (
+            discount["max_uses"] is not None
+            and discount["times_used"] >= discount["max_uses"]
+        ):
+            display_status = "Usage Limit Reached"
+            status_class = "bg-warning text-dark"
+        else:
+            display_status = "Active"
+            status_class = "bg-success"
+
+        discount_data = dict(discount)
+        discount_data["display_status"] = display_status
+        discount_data["status_class"] = status_class
+
+        discounts_with_status.append(discount_data)
 
     total_discounts = len(discount_rows)
     active_discounts = sum(
-        1 for discount in discount_rows if discount["is_active"]
+        1
+        for discount in discounts_with_status
+        if discount["display_status"] == "Active"
     )
 
     return render_template(
         "discounts.html",
-        discounts=discount_rows,
+        discounts=discounts_with_status,
         total_discounts=total_discounts,
         active_discounts=active_discounts,
     )
@@ -560,9 +659,7 @@ def create_discount():
 
         try:
             starts_at = (
-                datetime.fromisoformat(starts_at_input)
-                if starts_at_input
-                else None
+                datetime.fromisoformat(starts_at_input) if starts_at_input else None
             )
         except ValueError:
             flash(
@@ -573,9 +670,7 @@ def create_discount():
 
         try:
             expires_at = (
-                datetime.fromisoformat(expires_at_input)
-                if expires_at_input
-                else None
+                datetime.fromisoformat(expires_at_input) if expires_at_input else None
             )
         except ValueError:
             flash(
@@ -584,11 +679,7 @@ def create_discount():
             )
             return render_template("discount_form.html")
 
-        if (
-            starts_at is not None
-            and expires_at is not None
-            and expires_at <= starts_at
-        ):
+        if starts_at is not None and expires_at is not None and expires_at <= starts_at:
             flash(
                 "Expiration must be after the start date and time.",
                 "danger",
@@ -632,12 +723,8 @@ def create_discount():
                     description or None,
                     discount_type,
                     discount_value,
-                    starts_at.isoformat(sep=" ")
-                    if starts_at
-                    else None,
-                    expires_at.isoformat(sep=" ")
-                    if expires_at
-                    else None,
+                    starts_at.isoformat(sep=" ") if starts_at else None,
+                    expires_at.isoformat(sep=" ") if expires_at else None,
                     max_uses,
                     is_active,
                 ),
@@ -657,6 +744,7 @@ def create_discount():
         return redirect(url_for("main.discounts"))
 
     return render_template("discount_form.html")
+
 
 SORT_COLUMNS = {
     "id": "id",
@@ -696,9 +784,7 @@ def _fetch_orders(currently_placed, sort, direction):
 
     column = SORT_COLUMNS[sort]
     where_clause = (
-        "WHERE status = 'placed'"
-        if currently_placed
-        else "WHERE status != 'placed'"
+        "WHERE status = 'placed'" if currently_placed else "WHERE status != 'placed'"
     )
 
     query = (
@@ -726,7 +812,7 @@ def orders():
         sort=sort,
         direction=direction,
         sort_links=_sort_links(sort, direction),
-        page_title="Currently Placed Orders",
+        page_title="Placed Orders",
         is_history=False,
     )
 

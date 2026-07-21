@@ -1,23 +1,92 @@
 {% extends "base.html" %}
 
+{% block title %}
+Dashboard - Online Grocery Internal Portal
+{% endblock %}
+
 {% block content %}
+<div class="page-header">
+    <h1 class="page-title">
+        Dashboard
+    </h1>
 
-<h1>Dashboard</h1>
+    <p class="page-description">
+        Welcome, {{ username }}. Review current store activity and manage internal operations.
+    </p>
+</div>
 
-<p>Welcome, {{ username }}.</p>
-
-<p>This is the internal portal dashboard for the staff.</p>
-
-<div class="row mt-4">
-
-    <div class="col-md-4">
-        <div class="card">
+<div class="row g-3 mb-4">
+    <div class="col-6 col-lg-3">
+        <div class="card metric-card">
             <div class="card-body">
-                <h5>Product Catalog</h5>
-                <p>View, add, and update grocery products.</p>
+                <span class="metric-label">
+                    Total Products
+                </span>
+
+                <span class="fs-4 fw-bold text-dark">
+                    {{ total_products }}
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-6 col-lg-3">
+        <div class="card metric-card">
+            <div class="card-body">
+                <span class="metric-label">
+                    Low Stock
+                </span>
+
+                <span class="fs-4 fw-bold text-danger">
+                    {{ low_stock_products }}
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-6 col-lg-3">
+        <div class="card metric-card">
+            <div class="card-body">
+                <span class="metric-label">
+                    Placed Orders
+                </span>
+
+                <span class="fs-4 fw-bold text-warning">
+                    {{ placed_orders }}
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-6 col-lg-3">
+        <div class="card metric-card">
+            <div class="card-body">
+                <span class="metric-label">
+                    Active Discounts
+                </span>
+
+                <span class="fs-4 fw-bold text-success">
+                    {{ active_discounts }}
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-md-6 col-lg-4">
+        <div class="card content-card h-100">
+            <div class="card-body d-flex flex-column p-4">
+                <h2 class="h5 fw-bold">
+                    Products
+                </h2>
+
+                <p class="text-muted flex-grow-1">
+                    Manage product details, pricing, sales, images, and stock levels.
+                </p>
 
                 <a
-                    class="btn btn-success"
+                    class="btn btn-outline-success"
                     href="{{ url_for('main.products') }}"
                 >
                     View Products
@@ -26,26 +95,20 @@
         </div>
     </div>
 
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-body">
-                <h5>Inventory</h5>
-                <p>Track product stock levels.</p>
-                <button class="btn btn-secondary" disabled>
-                    Coming Soon
-                </button>
-            </div>
-        </div>
-    </div>
+    <div class="col-md-6 col-lg-4">
+        <div class="card content-card h-100">
+            <div class="card-body d-flex flex-column p-4">
+                <h2 class="h5 fw-bold">
+                    Orders
+                </h2>
 
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-body">
-                <h5>Orders</h5>
-                <p>Browse and execute customer orders.</p>
+                <p class="text-muted flex-grow-1">
+                    Review customer orders, execute placed orders, and view order history.
+                </p>
+
                 <a
-                        class="btn btn-success"
-                        href="{{ url_for('main.orders') }}"
+                    class="btn btn-outline-success"
+                    href="{{ url_for('main.orders') }}"
                 >
                     View Orders
                 </a>
@@ -53,14 +116,19 @@
         </div>
     </div>
 
-    <div class="col-md-4 mt-4">
-        <div class="card">
-            <div class="card-body">
-                <h5>Discounts</h5>
-                <p>Create and manage promotional discount codes.</p>
+    <div class="col-md-6 col-lg-4">
+        <div class="card content-card h-100">
+            <div class="card-body d-flex flex-column p-4">
+                <h2 class="h5 fw-bold">
+                    Discounts
+                </h2>
+
+                <p class="text-muted flex-grow-1">
+                    Create and review promotional discount codes and usage limits.
+                </p>
 
                 <a
-                    class="btn btn-success"
+                    class="btn btn-outline-success"
                     href="{{ url_for('main.discounts') }}"
                 >
                     View Discounts
@@ -68,7 +136,5 @@
             </div>
         </div>
     </div>
-
 </div>
-
 {% endblock %}

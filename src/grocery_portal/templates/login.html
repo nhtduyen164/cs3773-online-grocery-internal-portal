@@ -5,66 +5,91 @@ Staff Login - Online Grocery Internal Portal
 {% endblock %}
 
 {% block content %}
+<div class="login-container">
+    <div class="row justify-content-center">
+        <div class="col-md-7 col-lg-5">
+            <div class="card content-card">
+                <div class="card-header bg-success text-white border-0 p-4">
+                    <h1 class="h4 mb-1">
+                        Staff Login
+                    </h1>
 
-<div class="row justify-content-center">
-    <div class="col-md-5">
+                    <p class="mb-0 text-white-50">
+                        Sign in to access the internal grocery operations portal.
+                    </p>
+                </div>
 
-        <div class="card shadow">
-            <div class="card-header bg-success text-white">
-                <h4 class="mb-0">Staff Login</h4>
+                <div class="card-body p-4">
+                    <form
+                        method="POST"
+                        action="{{ url_for('main.login') }}"
+                    >
+                        <div class="mb-3">
+                            <label
+                                for="username"
+                                class="form-label"
+                            >
+                                Username
+                            </label>
+
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="username"
+                                name="username"
+                                value="{{ request.form.get('username', '') }}"
+                                autocomplete="username"
+                                required
+                                autofocus
+                            >
+                        </div>
+
+                        <div class="mb-4">
+                            <label
+                                for="password"
+                                class="form-label"
+                            >
+                                Password
+                            </label>
+
+                            <input
+                                type="password"
+                                class="form-control"
+                                id="password"
+                                name="password"
+                                autocomplete="current-password"
+                                required
+                            >
+                        </div>
+
+                        <button
+                            type="submit"
+                            class="btn btn-success w-100"
+                        >
+                            Sign In
+                        </button>
+                    </form>
+                </div>
             </div>
 
-            <div class="card-body">
-                <form method="POST" action="{{ url_for('main.login') }}">
+            <div class="alert alert-secondary mt-3 mb-0 small">
+                <p class="fw-semibold mb-2">
+                    Demo accounts
+                </p>
 
-                    <div class="mb-3">
-                        <label for="username" class="form-label">Username</label>
-                        <input
-                            type="text"
-                            class="form-control"
-                            id="username"
-                            name="username"
-                            value="{{ request.form.get('username', '') }}"
-                            autocomplete="username"
-                            required
-                        >
-                    </div>
+                <p class="mb-1">
+                    Cashier:
+                    <strong>employee1</strong> /
+                    <strong>password123</strong>
+                </p>
 
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Password</label>
-                        <input
-                            type="password"
-                            class="form-control"
-                            id="password"
-                            name="password"
-                            autocomplete="current-password"
-                            required
-                        >
-                    </div>
-
-                    <button type="submit" class="btn btn-success w-100">
-                        Login
-                    </button>
-
-                </form>
+                <p class="mb-0">
+                    Manager:
+                    <strong>manager1</strong> /
+                    <strong>admin123</strong>
+                </p>
             </div>
         </div>
-
-        <div class="text-muted text-center mt-3 small">
-            <p class="mb-1">
-                Cashier account:
-                <strong>employee1</strong> /
-                <strong>password123</strong>
-            </p>
-
-            <p class="mb-0">
-                Manager account:
-                <strong>manager1</strong> /
-                <strong>admin123</strong>
-            </p>
-        </div>
-
     </div>
 </div>
-
 {% endblock %}
