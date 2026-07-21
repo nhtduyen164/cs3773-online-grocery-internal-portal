@@ -43,9 +43,12 @@
             <div class="card-body">
                 <h5>Orders</h5>
                 <p>Browse and execute customer orders.</p>
-                <button class="btn btn-secondary" disabled>
-                    Coming Soon
-                </button>
+                <a
+                        class="btn btn-success"
+                        href="{{ url_for('main.orders') }}"
+                >
+                    View Orders
+                </a>
             </div>
         </div>
     </div>

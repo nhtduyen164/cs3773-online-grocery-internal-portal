@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>{{ page_title }}</h1>
+
+    {% if is_history %}
+    <a class="btn btn-outline-secondary btn-sm" href="{{ url_for('main.orders') }}">
+        &larr; Back to Currently Placed Orders
+    </a>
+    {% else %}
+    <a class="btn btn-outline-secondary btn-sm" href="{{ url_for('main.order_history') }}">
+        View Order History &rarr;
+    </a>
+    {% endif %}
+</div>
+
+<div class="btn-group mb-3" role="group" aria-label="Sort orders">
+    <a
+            class="btn btn-sm {{ 'btn-success' if sort == 'id' else 'btn-outline-success' }}"
+            href="{{ url_for(request.endpoint, sort='id', dir=sort_links['id']) }}"
+    >
+        Order # {% if sort == 'id' %}({{ direction }}){% endif %}
+    </a>
+    <a
+            class="btn btn-sm {{ 'btn-success' if sort == 'time' else 'btn-outline-success' }}"
+            href="{{ url_for(request.endpoint, sort='time', dir=sort_links['time']) }}"
+    >
+        Order Time {% if sort == 'time' %}({{ direction }}){% endif %}
+    </a>
+    <a
+        class="btn btn-sm {{ 'btn-success' if sort == 'customer' else 'btn-outline-success' }}"
+        href="{{ url_for(request.endpoint, sort='customer', dir=sort_links['customer']) }}"
+    >
+        Customer
+        {% if sort == 'customer' %}
+            ({{ direction }})
+        {% endif %}
+    </a>
+    <a
+            class="btn btn-sm {{ 'btn-success' if sort == 'amount' else 'btn-outline-success' }}"
+            href="{{ url_for(request.endpoint, sort='amount', dir=sort_links['amount']) }}"
+    >
+        Total Amount {% if sort == 'amount' %}({{ direction }}){% endif %}
+    </a>
+</div>
+
+{% if orders %}
+<div class="card">
+    <div class="table-responsive">
+        <table class="table table-striped align-middle mb-0">
+            <thead>
+            <tr>
+                <th>Order #</th>
+                <th>Customer</th>
+                <th>Status</th>
+                <th>Total</th>
+                <th>Placed At</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for order in orders %}
+            <tr>
+                <td>#{{ order['id'] }}</td>
+                <td>{{ order['customer_name'] }}</td>
+                <td>
+                                <span class="badge
+                                    {% if order['status'] == 'placed' %}bg-warning text-dark
+                                    {% elif order['status'] == 'completed' %}bg-success
+                                    {% elif order['status'] == 'cancelled' %}bg-secondary
+                                    {% elif order['status'] == 'refunded' %}bg-info text-dark
+                                    {% endif %}">
+                                    {{ order['status'] | capitalize }}
+                                </span>
+                </td>
+                <td>${{ '%.2f' | format(order['total_amount']) }}</td>
+                <td>{{ order['created_at'] }}</td>
+                <td>
+                    <a
+                            class="btn btn-sm btn-success"
+                            href="{{ url_for('main.order_detail', order_id=order['id']) }}"
+                    >
+                        View
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% else %}
+<p class="text-muted">
+    {% if is_history %}
+    No past orders yet.
+    {% else %}
+    No orders currently placed.
+    {% endif %}
+</p>
+{% endif %}
+
+{% endblock %}

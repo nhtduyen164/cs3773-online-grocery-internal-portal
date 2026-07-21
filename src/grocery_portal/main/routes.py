@@ -2,6 +2,7 @@ from functools import wraps
 
 from flask import Blueprint, render_template, request, redirect, url_for, session, flash
 from grocery_portal.db import get_db
+from werkzeug.exceptions import abort
 
 import sqlite3
 from datetime import datetime
@@ -656,3 +657,180 @@ def create_discount():
         return redirect(url_for("main.discounts"))
 
     return render_template("discount_form.html")
+
+SORT_COLUMNS = {
+    "id": "id",
+    "time": "created_at",
+    "customer": "customer_name COLLATE NOCASE",
+    "amount": "total_amount",
+}
+
+DEFAULT_SORT = "time"
+DEFAULT_DIRECTION = "desc"
+
+
+def _get_sort_args():
+    sort = request.args.get("sort", DEFAULT_SORT)
+    direction = request.args.get("dir", DEFAULT_DIRECTION)
+
+    if sort not in SORT_COLUMNS:
+        sort = DEFAULT_SORT
+    if direction not in ("asc", "desc"):
+        direction = DEFAULT_DIRECTION
+
+    return sort, direction
+
+
+def _sort_links(sort, direction):
+    links = {}
+    for col in SORT_COLUMNS:
+        if col == sort:
+            links[col] = "desc" if direction == "asc" else "asc"
+        else:
+            links[col] = "asc"
+    return links
+
+
+def _fetch_orders(currently_placed, sort, direction):
+    db = get_db()
+
+    column = SORT_COLUMNS[sort]
+    where_clause = (
+        "WHERE status = 'placed'"
+        if currently_placed
+        else "WHERE status != 'placed'"
+    )
+
+    query = (
+        "SELECT "
+        "id, "
+        "customer_name, "
+        "status, "
+        "total_amount, "
+        "created_at "
+        f"FROM orders {where_clause} "
+        f"ORDER BY {column} {direction.upper()}"
+    )
+
+    return db.execute(query).fetchall()
+
+
+@main_bp.route("/orders")
+@login_required
+def orders():
+    sort, direction = _get_sort_args()
+    orders_list = _fetch_orders(currently_placed=True, sort=sort, direction=direction)
+    return render_template(
+        "orders/list.html",
+        orders=orders_list,
+        sort=sort,
+        direction=direction,
+        sort_links=_sort_links(sort, direction),
+        page_title="Currently Placed Orders",
+        is_history=False,
+    )
+
+
+@main_bp.route("/orders/history")
+@login_required
+def order_history():
+    sort, direction = _get_sort_args()
+    orders_list = _fetch_orders(currently_placed=False, sort=sort, direction=direction)
+    return render_template(
+        "orders/list.html",
+        orders=orders_list,
+        sort=sort,
+        direction=direction,
+        sort_links=_sort_links(sort, direction),
+        page_title="Order History",
+        is_history=True,
+    )
+
+
+def _get_order_or_404(order_id):
+    db = get_db()
+
+    order = db.execute(
+        """
+        SELECT
+            id,
+            customer_name,
+            status,
+            subtotal,
+            discount_amount,
+            total_amount,
+            created_at,
+            updated_at
+        FROM orders
+        WHERE id = ?
+        """,
+        (order_id,),
+    ).fetchone()
+
+    if order is None:
+        abort(404, f"Order id {order_id} doesn't exist.")
+
+    return order
+
+
+@main_bp.route("/orders/<int:order_id>")
+@login_required
+def order_detail(order_id):
+    db = get_db()
+    order = _get_order_or_404(order_id)
+    items = db.execute(
+        "SELECT p.name AS name, oi.quantity AS quantity, oi.unit_price AS unit_price,"
+        " (oi.quantity * oi.unit_price) AS line_total"
+        " FROM order_items oi"
+        " JOIN products p ON p.id = oi.product_id"
+        " WHERE oi.order_id = ?",
+        (order_id,),
+    ).fetchall()
+
+    return render_template("orders/detail.html", order=order, items=items)
+
+
+@main_bp.route("/orders/<int:order_id>/execute", methods=("POST",))
+@login_required
+def execute_order(order_id):
+    db = get_db()
+    order = _get_order_or_404(order_id)
+
+    if order["status"] != "placed":
+        flash("Only currently placed orders can be executed.", "warning")
+        return redirect(url_for("main.order_detail", order_id=order_id))
+
+    items = db.execute(
+        "SELECT oi.product_id AS product_id, oi.quantity AS quantity,"
+        " p.name AS name, p.stock_quantity AS stock_quantity"
+        " FROM order_items oi"
+        " JOIN products p ON p.id = oi.product_id"
+        " WHERE oi.order_id = ?",
+        (order_id,),
+    ).fetchall()
+
+    if not items:
+        flash("This order does not contain any items.", "warning")
+        return redirect(url_for("main.order_detail", order_id=order_id))
+
+    shortages = [item for item in items if item["quantity"] > item["stock_quantity"]]
+
+    if shortages:
+        names = ", ".join(item["name"] for item in shortages)
+        flash(f"Not enough inventory to execute this order: {names}.", "error")
+        return redirect(url_for("main.order_detail", order_id=order_id))
+
+    for item in items:
+        db.execute(
+            "UPDATE products SET stock_quantity = stock_quantity - ? WHERE id = ?",
+            (item["quantity"], item["product_id"]),
+        )
+
+    db.execute(
+        "UPDATE orders SET status = 'completed', updated_at = ? WHERE id = ?",
+        (datetime.now().strftime("%Y-%m-%d %H:%M:%S"), order_id),
+    )
+    db.commit()
+
+    flash("Order executed successfully.", "success")
+    return redirect(url_for("main.order_detail", order_id=order_id))

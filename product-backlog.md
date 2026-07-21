@@ -34,15 +34,15 @@ Since the final project deadline is July 30, the team will use a compressed thre
 | B041 | Replace temporary hardcoded login with database-backed user authentication      | High     | Cameron         | Done  | Sprint 2 |
 | B018 | Add discount code creation                                                      | Medium   | Cameron         | Done  | Sprint 2 |
 | B019 | Add sale item support for products                                              | Medium   | Cameron         | Done  | Sprint 2 |
-| B020 | Create orders list page showing currently placed orders                         | High     | Esteban         | To Do  | Sprint 2 |
-| B021 | Create order detail page showing customer, items, quantities, prices, and total | High     | Esteban          | To Do  | Sprint 2 |
-| B022 | Add order sorting by order time                                                 | Medium   | Esteban         | To Do  | Sprint 2 |
-| B023 | Add order sorting by customer                                                   | Medium   | Esteban          | To Do  | Sprint 2 |
-| B024 | Add order sorting by total dollar amount                                        | Medium   | Esteban          | To Do  | Sprint 2 |
-| B025 | Add order execution logic                                                       | High     | TBD         | To Do  | Sprint 2 |
-| B026 | Reduce product quantity when an order is executed                               | High     | TBD         | To Do  | Sprint 2 |
-| B027 | Change order status when an order is executed                                   | High     | TBD         | To Do  | Sprint 2 |
-| B028 | Prevent order execution when inventory is insufficient                          | Medium   | TBD         | To Do  | Sprint 2 |
+| B020 | Create orders list page showing currently placed orders                         | High     | Esteban         | Done  | Sprint 2 |
+| B021 | Create order detail page showing customer, items, quantities, prices, and total | High     | Esteban         | Done | Sprint 2 |
+| B022 | Add order sorting by order time                                                 | Medium   | Esteban         | Done  | Sprint 2 |
+| B023 | Add order sorting by customer                                                   | Medium   | Esteban         | Done  | Sprint 2 |
+| B024 | Add order sorting by total dollar amount                                        | Medium   | Esteban         | Done | Sprint 2 |
+| B025 | Add order execution logic                                                       | High     | Esteban         | Done  | Sprint 2 |
+| B026 | Reduce product quantity when an order is executed                               | High     | Esteban         | Done  | Sprint 2 |
+| B027 | Change order status when an order is executed                                   | High     | Esteban         | Done  | Sprint 2 |
+| B028 | Prevent order execution when inventory is insufficient                          | Medium   | Esteban         | Done  | Sprint 2 |
 | B029 | Add unit tests for product creation/update logic                                | High     | TBD         | To Do  | Sprint 3 |
 | B030 | Add unit tests for product search/sort logic                                    | Medium   | TBD         | To Do  | Sprint 3 |
 | B031 | Add unit tests for order execution and inventory reduction                      | High     | TBD         | To Do  | Sprint 3 |
