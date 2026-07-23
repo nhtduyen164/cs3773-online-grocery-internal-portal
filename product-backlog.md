@@ -54,7 +54,7 @@ Since the final project deadline is July 30, the team will use a compressed thre
 | B037 | Update state diagram if implementation changed                                  | Medium   | Chap         | To Do  | Sprint 3 |
 | B038 | Create workload distribution report                                             | High     | TBD         | To Do  | Sprint 3 |
 | B039 | Prepare demo script or recorded demo backup                                     | High     | Chap         | To Do  | Sprint 3 |
-| B040 | Prepare presentation sections for each team member                              | High     | TBD         | To Do  | Sprint 3 |
+| B040 | Prepare presentation sections for each team member                              | High     | Myar         | Done  | Sprint 3 |
 
 ## Status Definitions
 
