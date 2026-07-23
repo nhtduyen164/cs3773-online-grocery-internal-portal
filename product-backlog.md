@@ -44,16 +44,16 @@ Since the final project deadline is July 30, the team will use a compressed thre
 | B027 | Change order status when an order is executed                                   | High     | Esteban         | Done  | Sprint 2 |
 | B028 | Prevent order execution when inventory is insufficient                          | Medium   | Esteban         | Done  | Sprint 2 |
 | B029 | Add unit tests for product creation/update logic                                | High     | TBD         | To Do  | Sprint 3 |
-| B030 | Add unit tests for product search/sort logic                                    | Medium   | TBD         | To Do  | Sprint 3 |
-| B031 | Add unit tests for order execution and inventory reduction                      | High     | Cameron         | To Do  | Sprint 3 |
+| B030 | Add unit tests for product search/sort logic                                    | Medium   | Chap         | To Do  | Sprint 3 |
+| B031 | Add unit tests for order execution and inventory reduction                      | High     | TBD         | To Do  | Sprint 3 |
 | B032 | Add unit tests for login or authentication logic                                | Medium   | TBD         | To Do  | Sprint 3 |
 | B033 | Clean up UI styling and navigation                                              | Medium   | Cameron         | Done  | Sprint 3 |
 | B034 | Update README with setup and run instructions                                   | High     | TBD         | To Do  | Sprint 3 |
-| B035 | Update user stories if implementation changed                                   | Medium   | TBD         | To Do  | Sprint 3 |
-| B036 | Update class diagram if implementation changed                                  | Medium   | TBD         | To Do  | Sprint 3 |
-| B037 | Update state diagram if implementation changed                                  | Medium   | TBD         | To Do  | Sprint 3 |
+| B035 | Update user stories if implementation changed                                   | Medium   | Chap         | To Do  | Sprint 3 |
+| B036 | Update class diagram if implementation changed                                  | Medium   | Chap         | To Do  | Sprint 3 |
+| B037 | Update state diagram if implementation changed                                  | Medium   | Chap         | To Do  | Sprint 3 |
 | B038 | Create workload distribution report                                             | High     | TBD         | To Do  | Sprint 3 |
-| B039 | Prepare demo script or recorded demo backup                                     | High     | TBD         | To Do  | Sprint 3 |
+| B039 | Prepare demo script or recorded demo backup                                     | High     | Chap         | To Do  | Sprint 3 |
 | B040 | Prepare presentation sections for each team member                              | High     | TBD         | To Do  | Sprint 3 |
 
 ## Status Definitions
