@@ -71,7 +71,7 @@
                 accept="image/png, image/jpeg, image/jpg, image/webp, image/gif"
         >
         <div class="form-text">
-            {% if product and product.get('image_path') %}
+            {% if product and product['image_path'] %}
             Current image: <code>{{ product['image_path'] }}</code>. Upload a new file to replace it, or leave blank to keep it.
             {% else %}
             Upload an image (PNG, JPG, WEBP). If left blank, a default placeholder will be used.
