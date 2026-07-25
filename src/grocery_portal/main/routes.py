@@ -1,15 +1,25 @@
 from functools import wraps
 
-from flask import Blueprint, render_template, request, redirect, url_for, session, flash
+from flask import Blueprint, render_template, request, redirect, url_for, session, flash, current_app
 from grocery_portal.db import get_db
 from werkzeug.exceptions import abort
+from werkzeug.utils import secure_filename
 
+import os
 import sqlite3
 from datetime import datetime
 from werkzeug.security import check_password_hash
 
 main_bp = Blueprint("main", __name__)
 
+# Temporary users for sprint 1 login testing
+# This can be replaced with users from the database later
+USERS = {
+    "employee1": "password123",
+    "manager1": "admin123"
+}
+
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'webp', 'gif'}
 
 def login_required(route_function):
     @wraps(route_function)
@@ -221,6 +231,8 @@ def products():
         sort=sort,
     )
 
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @main_bp.route("/products/new", methods=["GET", "POST"])
 @login_required
@@ -230,10 +242,10 @@ def create_product():
     if request.method == "POST":
         name = request.form.get("name", "").strip()
         description = request.form.get("description", "").strip()
-        image_path = (
+        '''image_path = (
             request.form.get("image_path", "").strip()
             or "images/products/placeholder.png"
-        )
+        )'''
         price_input = request.form.get("price", "").strip()
         stock_quantity_input = request.form.get(
             "stock_quantity",
@@ -244,6 +256,22 @@ def create_product():
             "sale_price",
             "",
         ).strip()
+
+        image_path = "images/products/placeholder.png"
+
+        if 'image_file' in request.files:
+            file = request.files['image_file']
+
+            if file and file.filename != '' and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+
+                upload_dir = os.path.join(current_app.root_path, 'static', 'images', 'products')
+                os.makedirs(upload_dir, exist_ok=True) # Create folder if it doesn't exist
+
+                save_path = os.path.join(upload_dir, filename)
+                file.save(save_path)
+
+                image_path = f"images/products/{filename}"
 
         if not name:
             flash("Product name is required.", "danger")
