@@ -422,10 +422,22 @@ def edit_product(product_id):
     if request.method == "POST":
         name = request.form.get("name", "").strip()
         description = request.form.get("description", "").strip()
-        image_path = (
-            request.form.get("image_path", "").strip()
-            or "images/products/placeholder.png"
-        )
+        image_path = product["image_path"] if product["image_path"] else "images/products/placeholder.png"
+
+        if 'image_file' in request.files:
+            file = request.files['image_file']
+
+            if file and file.filename != '' and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+
+                upload_dir = os.path.join(current_app.root_path, 'static', 'images', 'products')
+                os.makedirs(upload_dir, exist_ok=True)
+
+                save_path = os.path.join(upload_dir, filename)
+                file.save(save_path)
+
+                image_path = f"images/products/{filename}"
+
         price_input = request.form.get("price", "").strip()
         stock_quantity_input = request.form.get(
             "stock_quantity",
