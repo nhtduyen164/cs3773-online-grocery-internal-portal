@@ -23,7 +23,7 @@
     <div class="col-xl-9">
         <div class="card content-card">
             <div class="card-body p-4">
-                <form method="POST">
+                <form method="POST" enctype="multipart/form-data">
                     <div class="row g-3">
                         <div class="col-12">
                             <label
@@ -59,27 +59,25 @@
                             >{{ request.form.get('description', product['description'] if product else '') }}</textarea>
                         </div>
 
-                        <div class="col-12">
-                            <label
-                                for="image_path"
-                                class="form-label"
-                            >
-                                Image Path
-                            </label>
-
-                            <input
-                                type="text"
-                                class="form-control"
-                                id="image_path"
-                                name="image_path"
-                                value="{{ request.form.get('image_path', product['image_path'] if product else '') }}"
-                                placeholder="images/products/placeholder.png"
-                            >
-
-                            <div class="form-text">
-                                Enter a path relative to the static folder.
-                            </div>
-                        </div>
+    <div class="mb-3">
+        <label for="image_file" class="form-label">
+            Product Image
+        </label>
+        <input
+                type="file"
+                class="form-control"
+                id="image_file"
+                name="image_file"
+                accept="image/png, image/jpeg, image/jpg, image/webp, image/gif"
+        >
+        <div class="form-text">
+            {% if product and product['image_path'] %}
+            Current image: <code>{{ product['image_path'] }}</code>. Upload a new file to replace it, or leave blank to keep it.
+            {% else %}
+            Upload an image (PNG, JPG, WEBP). If left blank, a default placeholder will be used.
+            {% endif %}
+        </div>
+    </div>
 
                         <div class="col-md-6">
                             <label
