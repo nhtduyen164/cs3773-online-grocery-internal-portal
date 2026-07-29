@@ -1,10 +1,17 @@
 LLM Usage Reports
-______________________________________________________________________
+_____________________________________________________________________________________________________________
 
 Esteban:
+The primary LLM I used when working on this project was Gemini. I used this ai mostly for debugging when 
+I found myself stumped or in some sort of halt. I also used this ai to explain to me the code of my teammates
+when needed, especially since I was new to coding in Python and using SQL. Lastly, I used ai in the beginning
+of the project to generate a starting UI framework (e.g. products.html) that I could work off of for the rest 
+of the project.
 
 Cameron:
 
+
 Myar:
+
 
 Chapell:
