@@ -17,7 +17,7 @@ The workload was divided among team members based on their work on major system 
 | Cameron Ortiz | Project setup, product catalog features, authentication improvements, discounts and sale items, unit testing, UI cleanup, documentation, and repository coordination | Set up the Flask project and SQLite initialization process; implemented product display, availability, search, sorting, discounts, sale items, and database-backed authentication; created unit tests for products, authentication, and order execution; improved the interface and navigation; and helped maintain the backlog, review and merge code, prepare the demo, and finalize project documentation. | 30% |
 | Esteban Fuentes | Initial bootstrap layout, data for users, products, discounts, and orders. Orders page along with its corresponding logics | Created data for users, products, discounts, and orders along with the orders page and its sorting, listing of details, and execution logics. | 25% |
 | Myar Nguyen | Login/logout handling, product create/edit forms, documentation, and demo preparation | Worked on staff login/logout, product creation and product edit/update forms, GitHub workflow support, demo script, and final presentation organization. | 25% |
-| Chapell Carr |  |  |  |
+| Chapell Carr | UML and software design documentation, state diagram development, dependency management, presentation planning and editing, and supplemental project documentation.  | Created and updated the UML class and state diagrams, maintained software design documentation, assisted with dependency installation and package upgrades, helped resolve merge conflicts, edited and finalized the project presentation, and supported project documentation and debugging throughout development. | 20%|
 
 ## Detailed Task Breakdown 
 
@@ -33,8 +33,8 @@ I contributed to the data creation for users, products, discounts, and orders al
 I contributed to the login and product management portions of the project. It included staff login/logout functionality, session handling, dashboard access, and product creation and editing forms. I was also in charge of preparing final documentation, the demo script, presentation, and github workflow support.
 
 ### Chapell Carr
-[to do]
 
+I contributed to the software design and documentation portions of the project by working on the UML class and state diagrams to reflect the system implementation. I also assisted with dependency installation, package upgrades, and resolving merge conflicts during development. In addition I helped plan and then edited and finalized the recorded presentation, contributed to project documentation, and provided debugging support. 
 
 ## Collaboration and Version Control
 
