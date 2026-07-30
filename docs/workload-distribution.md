@@ -15,7 +15,7 @@ The workload was divided among team members based on their work on major system 
 | Team Member | Main Responsibilities | Major Contributions | Approximate Workload |
 |---|---|---|---|
 | Cameron Ortiz | Project setup, product catalog features, authentication improvements, discounts and sale items, unit testing, UI cleanup, documentation, and repository coordination | Set up the Flask project and SQLite initialization process; implemented product display, availability, search, sorting, discounts, sale items, and database-backed authentication; created unit tests for products, authentication, and order execution; improved the interface and navigation; and helped maintain the backlog, review and merge code, prepare the demo, and finalize project documentation. | 30% |
-| Esteban Fuentes | Initial bootstrap UI, data for users, products, discounts, and orders. Orders page along with its corresponding logics | Created data for users, products, discounts, and orders along with the orders page and its sorting, listing of details, and execution logics. | 25% |
+| Esteban Fuentes | Initial bootstrap layout, data for users, products, discounts, and orders. Orders page along with its corresponding logics | Created data for users, products, discounts, and orders along with the orders page and its sorting, listing of details, and execution logics. | 25% |
 | Myar Nguyen | Login/logout handling, product create/edit forms, documentation, and demo preparation | Worked on staff login/logout, product creation and product edit/update forms, GitHub workflow support, demo script, and final presentation organization. | 25% |
 | Chapell Carr |  |  |  |
 
