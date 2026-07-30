@@ -9,7 +9,11 @@ of the project to generate a starting UI framework (e.g. products.html) that I c
 of the project.
 
 Cameron:
-I used ChatGPT as my primary LLM throughout the project to help plan implementation steps, generate and revise portions of the Flask, SQLite, HTML, and unit-testing code, troubleshoot errors, and improve documentation and presentation materials. Although I used AI extensively, I reviewed and adapted its suggestions to fit our project structure, tested the resulting changes, resolved integration issues, and made the final implementation decisions for my assigned features.
+I used ChatGPT as my primary LLM throughout the project to help plan implementation steps, generate and revise 
+portions of the Flask, SQLite, HTML, and unit-testing code, troubleshoot errors, and improve documentation and 
+presentation materials. Although I used AI extensively, I reviewed and adapted its suggestions to fit our project 
+structure, tested the resulting changes, resolved integration issues, and made the final implementation decisions 
+for my assigned features.
 
 
 Myar:
