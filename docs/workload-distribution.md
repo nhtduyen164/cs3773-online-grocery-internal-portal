@@ -30,7 +30,7 @@ The workload was divided among team members based on their works on major system
 
 ### Myar Nguyen
 
-I contributed to the login and product management portions of the project. It included staff login/logout functionality, session handling, dashboard access, and product creation and editing forms. She also helped prepare final documentation, the demo script, presentation organization, and GitHub-related workflow support.
+I contributed to the login and product management portions of the project. It included staff login/logout functionality, session handling, dashboard access, and product creation and editing forms. I was also in charge of preparing final documentation, the demo script, presentation, and github workflow support.
 
 ### Chapell Carr
 [to do]
