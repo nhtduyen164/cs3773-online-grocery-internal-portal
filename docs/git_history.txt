@@ -1,0 +1,135 @@
+* f5f1e96 Implemented new product image logic.
+* 0770d27 Implemented new product image logic.
+* 2ba61cd Implemented new product image logic.
+* d35bbd6 Update owner for presentation sections in backlog
+* d3ca735 docs(backlog): complete B029 and B032
+*   f873be3 Merge pull request #16 from nhtduyen164/test/b032-authentication
+|\  
+| * 2f54225 test(auth): add login and authentication tests
+|/  
+*   f8ed95c Merge pull request #15 from nhtduyen164/test/b029-b032-product-auth
+|\  
+| * 1e49a3e test(products): add creation and update tests
+|/  
+* 93406dd docs(backlog): complete B031 and assign B029 and B032
+*   51cc772 Merge pull request #14 from nhtduyen164/b031-order-execution-tests
+|\  
+| *   0b7ed16 Merge remote-tracking branch 'origin/main' into b031-order-execution-tests
+| |\  
+| |/  
+|/|   
+* | 9cb46d9 product backlog
+| * a541063 test(orders): add order execution tests
+| * 67eb32c docs(backlog): assigned B031
+|/  
+* a56b0b7 docs(backlog): mark B033 complete
+*   0ce7d0c Merge pull request #13 from nhtduyen164/b033-ui-styling-navigation
+|\  
+| * 3941b03 style(ui): clean up styling and navigation
+|/  
+*   43ed603 Merge pull request #12 from nhtduyen164/fix/b020-b028-order-functionality
+|\  
+| * 1b8bc68 fix(orders): complete customer details and sorting
+| * ca55f89 product-backlog.md
+| * 5d4b1a3 Implemented tasks B020-B024
+|/  
+* 0e4aadc docs(backlog): mark B041 done and assign B033
+*   3335d6d Merge pull request #11 from nhtduyen164/b041-database-authentication
+|\  
+| * fa0fb62 feat(auth): use database-backed login
+|/  
+* 6151642 product-backlog.md
+* 02a1bc4 docs(backlog): update task statuses and assign B041
+*   2d3ef23 Merge pull request #10 from nhtduyen164/b019-product-sale-support
+|\  
+| * 35fc5e5 feat(products): add sale item support
+|/  
+*   8ce6f2d Merge pull request #9 from nhtduyen164/b018-discount-code-creation
+|\  
+| * cc4868a feat(discounts): add discount code creation
+|/  
+* 83b0c5c docs(backlog): assign B018-B019
+*   a996a2a Merge pull request #8 from nhtduyen164/b013-b017-product-catalog-features
+|\  
+| * a8000eb docs(backlog): mark B013-B017 complete
+| * fc54d63 feat(products): add price and availability sorting
+| * 3193a18 feat(products): add product search
+| * c70dd36 feat(products): align quantity color with availability
+| * 0f7e077 feat(products): add product image path support
+|/  
+* 0b17293 docs(backlog): assign B013-B017 and add database authentication task
+*   826d389 Merge pull request #7 from nhtduyen164/fix/product-route-integration
+|\  
+| * 10c1e49 fix(products): repair product catalog integration
+| * 8529657 docs(readme): add setup and run instructions
+| * 32b4e48 fix(products): restore catalog route and blueprint registration
+|/  
+* 5776bc2 Update product backlog to mark tasks as Done
+*   57da1c9 Merge pull request #6 from nhtduyen164/product-create-edit-forms
+|\  
+| * 6a3cd2d add product creation form, product edit/update form
+|/  
+* 8c3d5e4 Update product backlog with assigned tasks
+* 62f40f0 Updated progress
+*   46be26b Merge pull request #5 from nhtduyen164/login-dashboard
+|\  
+| *   8010116 Merge branch 'main' into login-dashboard
+| |\  
+| |/  
+|/|   
+* | b41b142 index.html
+* |   0529bda Merge pull request #4 from nhtduyen164/B010
+|\ \  
+| * | 5adb10c Implemented product catalog page.
+|/ /  
+| * 9ecd33e updated routes.py and created login, dashboard
+|/  
+*   057fef9 B004-B006 (#3)
+|\  
+| *   2c5be84 Merge branch 'main' into B004-B006
+| |\  
+| |/  
+|/|   
+* | 48514e6 Updated tasks status B007-B009
+* | 0d6e9de product-backlog.md
+* | 42e846e product-backlog.md
+* | 936dd21 product-backlog.md
+| * f7bb413 product-backlog.md
+| * 3ed70d2 product-backlog.md
+| * 9c96962 Created database tables for users, products, discounts, orders, and order items. Created seed data for employees, products, and orders. Implemented a bootstrap layout.
+| * b4bdccf Created database tables for users, products, discounts, orders, and order items. Created seed data for employees, products, and orders. Implemented a bootstrap layout.
+|/  
+* 0214499 feat(database): add SQLite setup script (#2)
+*   fd58fd5 Merge pull request #1 from nhtduyen164/b001-flask-project-structure
+|\  
+| * 8486156 docs(backlog): update sprint one task status
+| * b02ca69 feat(project-structure): set up Flask app skeleton
+|/  
+* 1bdd61e docs(backlog): add implementation sprint plan
+* 7c9acd2 Updated the progress
+* e7858e9 Finalized the testable user stories
+* e42c7a5 Finalized the testable user stories
+* c363309 Refactor user stories formatting for consistency
+* 4e812c2 Add login, users, and product test cases
+* 628062c docs(class-diagram): add expanded UML diagram
+* 69d96fc added state diagram
+* 3c8f3eb docs(user-stories): add inventory discounts search and orders stories
+* 334f9a6 class-diagram.md
+* a7f08e1 Add user stories doc
+* d24bc59 Create app.py
+* cc9b909 Create seed_data.sql
+* 81993b0 Create schema.sql
+* d9f9704 Create README.md
+* 0912a75 Create workload-distribution.md
+* d2edbfb Create state-diagram.md
+* 2bfa330 Create class-diagram.md
+* 8c50baf Create test-cases.md
+* 21526d5 Create user-stories.md
+* e59821a Created a product backlog
+* 71b5f67 Update README with project overview
+* ecb274b Update README with project overview
+* 333b8c7 Update README with proposed tech stack
+* 397d266 Update README with project overview and structure
+* 5d55d09 Update README formatting for project title
+* 53301c1 Update README with project overview
+* 195809a Initial commit
