@@ -8,16 +8,16 @@
 
    **Test Case:**
    
-   * Create a preloaded user account with username “employee1” and password “password123”.
+   * Create a preloaded user account for Cashier with username “employee1” and password “password123”; for Manager with username "manager1" and password "admin123".
    * Open the login page.
-   * Enter “employee1” in the username text box.
-   * Enter “password123” in the password text box.
+   * Enter “employee1” or "manager1" in the username text box.
+   * Enter “password123” or "admin123" in the password text box.
    * Click the login button.
    * I should be taken to the internal portal dashboard.
    * Log out of the system.
    * Open the login page again.
-   * Enter “employee1” in the username text box.
-   * Enter “password1234” in the password text box.
+   * Enter “employee1” or "manager1" in the username text box.
+   * Enter “password1234” or "admin1234" in the password text box.
    * Click the login button.
    * I should see an error message saying that the username or password is incorrect.
 
@@ -58,11 +58,11 @@
    **Test Case:**
 
    * Log in with a valid staff account.
-   * Create a product named “Apples” with image “apples.jpg”, price $2.99, quantity 25, and description “Fresh red apples”.
-   * Create a product named “Milk” with image “milk.jpg”, price $3.49, quantity 10, and description “One gallon of whole milk”.
+   * Create a product named “Organic Bananas” with image “bananas.png”, price $0.59, quantity on hand 150, and description “Sold per pound, organic”.
+   * Create a product named “Whole Milk (1 Gallon)” with image “milk.png”, price $2.99, quantity on hand 80, and description “Vitamin D whole milk”.
    * Open the product catalog page.
-   * I should see “Apples” listed with image, price $2.99, quantity 25, and description “Fresh red apples”.
-   * I should see “Milk” listed with image, price $3.49, quantity 10, and description “One gallon of whole milk”.
+   * I should see “Organic Bananas” listed with image, price $0.59, quantity on hand 150, and description “Sold per pound, organic”.
+   * I should see “Whole Milk (1 Gallon)” listed with image, price $2.99, quantity on hand 80, and description “Vitamin D whole milk”.
 
 2. **Add New Product**
 
@@ -72,15 +72,15 @@
 
    * Log in with a valid staff account.
    * Open the add product page.
-   * Enter “Bananas” in the product name text box.
-   * Upload or enter the image “bananas.jpg”.
-   * Enter 1.49 in the price text box.
-   * Enter 40 in the quantity text box.
-   * Enter “Fresh yellow bananas” in the description text box.
+   * Enter “Roma Tomatoes” in the product name text box.
+   * Upload or enter the image “tomatoes.png”.
+   * Enter 1.99 in the Regular Price text box.
+   * Enter 120 in the Stock Quantity text box.
+   * Enter “Sold per pound” in the Description text box.
    * Click the submit button.
    * I should see a confirmation message that the product was added successfully.
    * Open the product catalog page.
-   * I should see “Bananas” listed with image, price $1.49, quantity 40, and description “Fresh yellow bananas”.
+   * I should see “Roma Tomatoes” listed with image, price $1.99, quantity 120, and description “Sold per pound”.
 
 3. **Reject Invalid Product Information**
 
@@ -94,9 +94,9 @@
    * Enter -2.99 in the price text box.
    * Enter 5.5 in the quantity text box.
    * Click the submit button.
-   * I should see an error message saying the product name is required.
-   * I should see an error message saying the price must be a valid non-negative number.
-   * I should see an error message saying the quantity must be a valid whole number.
+   * I should see an error message saying "Please fill out this field" at the product name.
+   * I should see an error message saying "Value must be greater than or equal to 0." in the the regular price text box.
+   * I should see an error message saying "Please enter a valid value. The two nearest values are # and #" in the stock quantity text box.
    * Open the product catalog page.
    * I should not see the invalid product listed in the catalog.
    
@@ -107,30 +107,29 @@
    **Test Case:** 
    
    * Log in with a valid staff account.
-   * Create a product named “Orange Juice” with image “orangejuice.jpg”, price $4.99, quantity 12, and description “Half gallon orange juice”.
+   * Create a product named “Chicken Breast” with image “chicken_breast.png”, price $5.49, stock quantity 10, and description “Boneless, per pound”.
    * Open the product catalog page.
-   * Click the edit button for “Orange Juice”.
-   * Change the price to $5.49.
-   * Change the quantity to 8.
-   * Change the description to “Half gallon pulp-free orange juice”.
+   * Click the edit button for “Chicken Breast”.
+   * Change the price to $4.49.
+   * Change the quantity to 70.
+   * Change the description to “Boneless, skinless, per pound”.
    * Click the save button.
-   * I should see a confirmation message that the product was updated successfully.
-   * Open the product catalog page.
-   * I should see “Orange Juice” listed with price $5.49, quantity 8, and description “Half gallon pulp-free orange juice”.
+   * I should be redirected to the product catalog page and see a confirmation message that "Product updated successfully."
+   * I should see “Chicken Breast” listed with price $4.49, quantity 70, and description “Boneless, skinless, per pound”.
 
-5. **Mark Product as Out of Stock/Discontinued**
+5. **Mark Product as Out of Stock/Low Stock**
 
    As a store employee, I want to mark a product as out of stock or discontinued so that the catalog correctly shows whether the product is currently available.
    
    **Test Case:**
    
    * Log in with a valid staff account.
-   * Create a product named “Strawberries” with quantity 15.
-   * Open the product catalog page.
-   * Change the status of “Strawberries” to out of stock.
-   * I should see “Strawberries” listed as out of stock in the catalog.
-   * Change the status of “Strawberries” to discontinued.
-   * I should see “Strawberries” listed as discontinued in the catalog.
+   * Create a product named “Free-Range Eggs (Dozen)” with quantity 60.
+   * Open the product catalog page and choose edit product.
+   * Change the stock quantity to 0 of “Free-Range Eggs”.
+   * I should see “Free-Range Eggs (Dozen)” listed as out of stock in the catalog.
+   * Change the stock quantity to the number less then the current number of “Free-Range Eggs (Dozen)”.
+   * I should see “Free-Range Egss (Dozen)” listed as low stock in the catalog.
    * The status change should be saved in the database.
 
 ## Inventory, Discounts, Search, and Orders
@@ -141,13 +140,13 @@
 
    **Test Case:**
 
-   * Create a product named “Apples” with quantity 25.
+   * Create a product named “Ground Coffee (12oz)” with quantity 55.
    * List the product catalog.
-   * I should see “Apples” listed with quantity 25.
-   * Create a product named “Milk” with quantity 10.
-   * Update the quantity of “Milk” to 6.
+   * I should see “Ground Coffee (12oz)” listed with quantity 55.
+   * Create a product named “Sourdough Bread” with quantity 50.
+   * Update the quantity of “Sourdough Bread” to 45.
    * List the product catalog.
-   * I should see “Milk” listed with quantity 6.
+   * I should see “Sourdough Bread” listed with quantity 45.
 
 2. **Mark Products as Out of Stock**
 
@@ -155,12 +154,12 @@
 
    **Test Case:**
 
-   * Create a product named “Bread” with quantity 0.
+   * Create a product named “Sourdough Bread” with quantity 0.
    * List the product catalog.
-   * I should see “Bread” marked as out of stock.
-   * Create a product named “Eggs” with quantity 12.
+   * I should see “Sourdough Bread” marked as out of stock.
+   * Create a product named “Free-Range Eggs (Dozen)” with quantity 12.
    * Ask for the product catalog.
-   * I should not see “Eggs” marked as out of stock.
+   * I should not see “Free-Range Eggs (Dozen)” marked as out of stock.
 
 3. **Allow for Creation of Discount Code**
 
@@ -168,10 +167,10 @@
 
    **Test Case:**
 
-   * Create a discount code named “SAVE10” with a 10% discount.
+   * Create a discount code named “WELCOME10” with a 10% discount for new customers.
    * Ask for the list of discount codes.
-   * I should see “SAVE10” listed with a 10% discount.
-   * Create a discount code named “SAVE10” again.
+   * I should see “WELCOME10” listed with a 10% discount.
+   * Create a discount code named “WELCOME10” again.
    * I should get an error because duplicate discount codes should not be allowed.
 
 4. **Allow for Creation of Sale Items**
@@ -180,13 +179,13 @@
 
    **Test Case:**
 
-   * Create a product named “Cereal” with price $5.00.
-   * Mark “Cereal” as a sale item with a sale price of $4.00.
+   * Create a product named “Cheddar Cheese Block” with price $6.79.
+   * Mark “Cereal” as a sale item with a sale price of $5.49.
    * Ask for the product catalog.
-   * I should see “Cereal” marked as a sale item with a sale price of $4.00.
-   * Create a product named “Orange Juice” with price $6.00.
+   * I should see “Cheddar Cheese Block” marked as a sale item with a sale price of $5.49.
+   * Create a product named “Chicken Breast” with price $4.49.
    * Ask for the product catalog.
-   * I should not see “Orange Juice” marked as a sale item.
+   * I should not see “Chicken Breast” marked as a sale item.
 
 5. **Search by Name/Description**
 
@@ -194,12 +193,12 @@
 
    **Test Case:**
 
-   * Create a product named “Organic Apples” with description “Fresh red apples.”
-   * Search for “Apples.”
-   * I should see “Organic Apples” in the search results.
-   * Create a product named “Whole Milk” with description “One gallon milk.”
-   * Search for “gallon.”
-   * I should see “Whole Milk” in the search results.
+   * Create a product named “Organic Bananas” with description “Sold per pound, organic”.
+   * Search for “Bananas.”
+   * I should see “Organic Bananas” in the search results.
+   * Create a product named “Cheddar Cheese Block” with description “Sharp cheddar, 8oz block.”
+   * Search for “block.”
+   * I should see “Cheddar Cheese Block” in the search results.
    * Search for “steak.”
    * I should not see products that do not match “steak” in the name or description.
 
@@ -209,13 +208,13 @@
 
    **Test Case:**
 
-   * Create a product named “Bananas” with price $1.50.
-   * Create a product named “Chicken” with price $9.99.
-   * Create a product named “Rice” with price $3.00.
-   * Sort products by price from lowest to highest.
-   * I should see the order “Bananas”, “Rice”, “Chicken.”
-   * Sort products by price from highest to lowest.
-   * I should see the order “Chicken”, “Rice”, “Bananas.”
+   * Create a product named “Cheddar Cheese Block” with price $5.49.
+   * Create a product named “Chicken Breast” with price $4.49.
+   * Create a product named “Free-Range Eggs (Dozen)” with price $5.29.
+   * Sort products by price from low to high.
+   * I should see the order “Chicken Breast”, “Free-Range Eggs (Dozen)”, “Cheddar Cheese Block.”
+   * Sort products by price from high to low.
+   * I should see the order “Cheddar Cheese Block”, “Free-Range Eggs (Dozen)”, “Chicken Breast.”
 
 7. **Sort by Availability**
 
@@ -223,12 +222,12 @@
 
    **Test Case:**
 
-   * Create a product named “Tomatoes” with quantity 15.
-   * Create a product named “Strawberries” with quantity 0.
+   * Create a product named “Roma Tomatoes” with quantity 120.
+   * Create a product named “Cheddar Cheese Block” with quantity 40.
    * Sort products by availability.
-   * I should see available products separated from out-of-stock products.
+   * I should see in-stock products first then low-stock products after.
    * Ask for available products only.
-   * I should see “Tomatoes” but not “Strawberries.”
+   * I should see “Roma Tomatoes” first but "Cheddar Cheese Block" listed at the end of the list.
 
 8. **Show Currently Placed Orders**
 
@@ -236,12 +235,12 @@
 
    **Test Case:**
 
-   * Create an order for customer “Vincent Vega” with status “Placed.”
+   * Create an order for customer “Sophia Martinez” with status “Placed.”
    * Ask for the list of currently placed orders.
-   * I should see the order for “Vincent Vega.”
-   * Create an order for customer “Marsellus Wallace” with status “Executed.”
+   * I should see the order for “Sophia Martinez.”
+   * Create an order for customer “Daniel Brooks” with status “Executed.”
    * Ask for the list of currently placed orders.
-   * I should not see the executed order for “Marsellus Wallace.”
+   * I should not see the executed order for “Daniel Brooks.”
 
 9. **Show Detailed Information of an Order**
 
@@ -249,10 +248,10 @@
 
    **Test Case:**
 
-   * Create an order for customer “Vincent Vega” containing 2 apples at $1.00 each and 1 milk at $4.00.
+   * Create an order for customer “Sophia Martinez” containing 4 Roma Tomatoes at $1.99 each, 1 Ground Coffee (12oz) at $8.99 and 1 Whole Milk (1 Gallon) at $3.49.
    * Open the order details.
    * I should see customer “Vincent Vega.”
-   * I should see 2 apples, 1 milk, and a total of $6.00.
+   * I should see 4 tomatoes, 1 ground coffee and 1 milk, and a total of $20.44.
 
 10. **Sort by Order Time**
 
@@ -273,10 +272,10 @@
 
     **Test Case:**
 
-    * Create an order for customer “Cliff Booth.”
-    * Create an order for customer “Rick Dalton.”
+    * Create an order for customer “Daniel Brooks.”
+    * Create an order for customer “Olivia Carter.”
     * Sort orders by customer name.
-    * I should see “Cliff Booth” before “Rick Dalton.”
+    * I should see “Daniel Brooks” before “Olivia Carter.”
 
 12. **Sort by Order Size in Dollar Amount**
 
@@ -284,12 +283,12 @@
 
     **Test Case:**
 
-    * Create an order with a total amount of $25.00.
-    * Create an order with a total amount of $75.00.
+    * Create an order with a total amount of $12.37.
+    * Create an order with a total amount of $32.34.
     * Sort orders by total amount from lowest to highest.
-    * I should see the $25.00 order before the $75.00 order.
+    * I should see the $12.37 order before the $32.34 order.
     * Sort orders by total amount from highest to lowest.
-    * I should see the $75.00 order before the $25.00 order.
+    * I should see the $32.34 order before the $12.37 order.
 
 13. **Execute an Order**
 
@@ -297,16 +296,16 @@
 
     **Test Case:**
 
-    * Create a product named “Apples” with quantity 25.
-    * Create a placed order for 5 apples.
+    * Create a product named “Organic Bananas” with quantity 25.
+    * Create a placed order for 5 bananas.
     * Execute the order.
     * I should see the order status changed to “Executed.”
-    * I should see the quantity of “Apples” reduced to 20.
-    * Create a product named “Milk” with quantity 10.
+    * I should see the quantity of “Organic Bananas” reduced to 20.
+    * Create a product named “Whole Milk (1 Gallon)” with quantity 10.
     * Create a placed order for 3 milk.
     * Execute the order.
     * I should see the order status changed to “Executed.”
-    * I should see the quantity of “Milk” reduced to 7.
+    * I should see the quantity of “Whole Milk (1 Gallon)” reduced to 7.
 
 14. **Prevent Order Execution When Inventory Is Insufficient**
 
