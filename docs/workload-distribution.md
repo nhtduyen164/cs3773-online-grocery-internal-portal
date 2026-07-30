@@ -13,13 +13,14 @@ The workload was divided among team members based on their works on major system
 ## Workload Distribution
 
 | Team Member  | Main Responsibilities  | Major Contributions  | Approximate Workload |
-| --------------- | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------- |
-| Cameron Ortiz   |                        |                                      |                   |
-| Esteban Fuentes |                         |                                            |                  |
-| Myar Nguyen     | Login/logout handling, product create/edit forms, documentation, and demo preparation | Worked on staff login/logout, product creation and product edit/update forms, GitHub workflow support, demo script, and final presentation organization. | 25%                  |
-| Chapell Carr    |                              |                                                                 |                   |
+| ------------ | ---------------------- | -------------------- | -------------------- |
+| Cameron Ortiz   |                     |                      |                      |
+| Esteban Fuentes |                     |                      |                      |
+| Myar Nguyen     | Login/logout handling, product create/edit forms, documentation, and demo preparation | Worked on staff login/logout, product creation and product edit/update forms, GitHub workflow support, demo script, and final presentation organization. | 25% |
+| Chapell Carr    |                     |                      |                      |
 
-## Detailed Task Breakdown (not sure if the table is good enough to remove this part)
+## Detailed Task Breakdown 
+(not sure if the table is good enough to remove this part)
 
 ### Cameron Ortiz
 [to do]
