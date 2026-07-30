@@ -49,7 +49,7 @@ Since the final project deadline is July 30, the team will use a compressed thre
 | B032 | Add unit tests for login or authentication logic                                | Medium   | Cameron         | Done  | Sprint 3 |
 | B033 | Clean up UI styling and navigation                                              | Medium   | Cameron         | Done  | Sprint 3 |
 | B034 | Update README with setup and run instructions                                   | High     | Cameron         | Done  | Sprint 3 |
-| B035 | Update user stories if implementation changed                                   | Medium   | Chap         | To Do  | Sprint 3 |
+| B035 | Update user stories if implementation changed                                   | Medium   | Myar         | Done  | Sprint 3 |
 | B036 | Update class diagram if implementation changed                                  | Medium   | Chap         | Done  | Sprint 3 |
 | B037 | Update state diagram if implementation changed                                  | Medium   | Chap         | Done | Sprint 3 |
 | B038 | Create workload distribution report                                             | High     | Myar         | Done  | Sprint 3 |
