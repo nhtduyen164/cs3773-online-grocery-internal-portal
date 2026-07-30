@@ -313,9 +313,9 @@
 
     **Test Case:**
 
-    * Create a product named “Bread” with quantity 2.
+    * Create a product named “Sourdough Bread” with quantity 2.
     * Create a placed order for 5 bread.
     * Try to execute the order.
     * I should get an error saying there is not enough inventory.
     * I should see the order remain in “Placed” status.
-    * I should see the quantity of “Bread” remain 2.
+    * I should see the quantity of “Sourdough Bread” remain 2.
