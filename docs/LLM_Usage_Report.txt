@@ -25,3 +25,9 @@ to help prepare the demo script, presentation outline, and final documentation w
 
 
 Chapell:
+I used ChatGPT as an LLM on this project. I used it mostly to help with debugging and whem I would run into road blocks.
+It came in handy the most when I was struggling with a series of merge conflicts due to a mix up of who was going to work on a 
+section of code. I helped save alot of time in that particular instance along with being less scary of guessing if I was handling it 
+correctly. I also used it to help format consistently across the board to match my group mates coding style. Along with being able to
+double check that my diagrams matched the projects structure correctly. Overall it was quite a helpful tool and allowed me to save time 
+and complete work I found to be of a higher quality. 
