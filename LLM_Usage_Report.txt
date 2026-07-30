@@ -12,6 +12,11 @@ Cameron:
 
 
 Myar:
+I used ChatGPT as the primary LLM on this project. I firstly used it to help me understand the project 
+requirements, organize my assigned user stories and test cases, and plan my implementation tasks 
+for the login, dashboard, and product form features. I also used ChatGPT for debugging help when working 
+with Flask routes, GitHub commands, database initialization, and template errors. Moreover, I used AI assistance 
+to help prepare the demo script, presentation outline, and final documentation wording that saved me lots of time.
 
 
 Chapell:
