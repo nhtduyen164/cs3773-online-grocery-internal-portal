@@ -12,7 +12,7 @@ The workload was divided among team members based on their works on major system
 
 ## Workload Distribution
 
-| Team Member  | Main Responsibilities                                                                  | Major Contributions                                                                                                                                                             | Approximate Workload |
+| Team Member  | Main Responsibilities  | Major Contributions  | Approximate Workload |
 | --------------- | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------- |
 | Cameron Ortiz   |                        |                                      |                   |
 | Esteban Fuentes |                         |                                            |                  |
