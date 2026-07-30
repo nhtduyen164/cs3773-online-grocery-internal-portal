@@ -8,22 +8,22 @@
 
 ## Overview
 
-The workload was divided among team members based on their works on major system features, documentation needs, and final presentation responsibilities. Our team used GitHub for version control and maintained a product backlog to track sprint tasks, task status, and feature progress.
+The workload was divided among team members based on their work on major system features, documentation requirements, and final presentation responsibilities. Our team used GitHub for version control and maintained a product backlog to track sprint tasks, assignments, status, and feature progress.
 
 ## Workload Distribution
 
-| Team Member  | Main Responsibilities  | Major Contributions  | Approximate Workload |
-| ------------ | ---------------------- | -------------------- | -------------------- |
-| Cameron Ortiz   |                     |                      |                      |
-| Esteban Fuentes |                     |                      |                      |
-| Myar Nguyen     | Login/logout handling, product create/edit forms, documentation, and demo preparation | Worked on staff login/logout, product creation and product edit/update forms, GitHub workflow support, demo script, and final presentation organization. | 25% |
-| Chapell Carr    |                     |                      |                      |
+| Team Member | Main Responsibilities | Major Contributions | Approximate Workload |
+|---|---|---|---|
+| Cameron Ortiz | Project setup, product catalog features, authentication improvements, discounts and sale items, unit testing, UI cleanup, documentation, and repository coordination | Set up the Flask project and SQLite initialization process; implemented product display, availability, search, sorting, discounts, sale items, and database-backed authentication; created unit tests for products, authentication, and order execution; improved the interface and navigation; and helped maintain the backlog, review and merge code, prepare the demo, and finalize project documentation. | 30% |
+| Esteban Fuentes |  |  |  |
+| Myar Nguyen | Login/logout handling, product create/edit forms, documentation, and demo preparation | Worked on staff login/logout, product creation and product edit/update forms, GitHub workflow support, demo script, and final presentation organization. | 25% |
+| Chapell Carr |  |  |  |
 
 ## Detailed Task Breakdown 
-(not sure if the table is good enough to remove this part)
 
 ### Cameron Ortiz
-[to do]
+
+I contributed to the initial project setup, including the Flask application structure, required packages, and SQLite database initialization process. I implemented several product-management features, including product information display, inventory availability, searching, sorting, discount codes, sale items, and database-backed user authentication. I also created unit tests for product creation and updates, authentication, order execution, inventory reduction, and insufficient-inventory handling. In addition, I helped clean up the user interface, maintain the product backlog, review and merge team contributions, prepare my portion of the demonstration, and finalize the README and project documentation.
 
 ### Esteban Fuentes
 [to do]
@@ -42,4 +42,4 @@ Our team used GitHub to collaborate throughout the project. Tasks were tracked i
 
 ## Notes
 
-The workload percentages are approximate and based on each member’s assigned tasks, completed features, documentation contributions, and final presentation responsibilities.
+The workload percentages are approximate and are based on each member’s assigned tasks, completed features, documentation contributions, and final presentation responsibilities. The final percentages should total 100%.
