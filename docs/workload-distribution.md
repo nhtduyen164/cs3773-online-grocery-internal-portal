@@ -22,17 +22,17 @@ The workload was divided among team members based on their works on major system
 ## Detailed Task Breakdown (not sure if the table is good enough to remove this part)
 
 ### Cameron Ortiz
-
+[to do]
 
 ### Esteban Fuentes
-
+[to do]
 
 ### Myar Nguyen
 
 I contributed to the login and product management portions of the project. It included staff login/logout functionality, session handling, dashboard access, and product creation and editing forms. She also helped prepare final documentation, the demo script, presentation organization, and GitHub-related workflow support.
 
 ### Chapell Carr
-
+[to do]
 
 
 ## Collaboration and Version Control
